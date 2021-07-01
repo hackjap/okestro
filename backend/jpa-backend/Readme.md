@@ -99,3 +99,35 @@
 
 
  > ※ 상황에 따라 구현 클래스를 변경해야 하면 설정을 통해 스프링 빈으로 등록한다.
+
+
+## 회원 관리 예제 - 웹 MVC 개발 
+
+### GET
+> 주로 조회용, 
+### POST 
+> 주로 작성, form으로 받아 @PostMapping 으로 전달
+
+
+
+## JPA
+ ORM (Object Relation Mapping):  
+
+ jpa = interface (표준)
+ hybernate jpa의 구현체이자 사용되는 기술
+ 여러 업체에서 구현한 것들을 사용
+
+ ### 사용법
+> 자바객체의 @Entity 어노테이션을 달아줌
+> EntityManager를 주입 받아야 함 
+> 
+
+
+### 스프링 데이터 JPA
+> 실무에서 RDB의 JPA 는 필수!! JPA에서의 편리성을 극대화 
+
+
+
+
+
+ 

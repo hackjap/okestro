@@ -5,12 +5,14 @@ import jpa.jpabackend.repository.MemberRepository;
 import jpa.jpabackend.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 // 서비스는 비즈니스적 로직을 처리
-
+// 데이터의 이동(저장,변경) Transactional이 필요
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
 
