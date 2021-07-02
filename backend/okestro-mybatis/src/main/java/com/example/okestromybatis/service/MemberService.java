@@ -1,6 +1,8 @@
 package com.example.okestromybatis.service;
 
 import com.example.okestromybatis.domain.Member;
+import com.example.okestromybatis.domain.Session;
+import com.example.okestromybatis.dto.SessionResponseDto;
 import com.example.okestromybatis.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +39,8 @@ public class MemberService {
                 });
     }
 
+
+
     /**
      * 전체 회원 조회
      */
@@ -46,6 +50,10 @@ public class MemberService {
 
     public Optional<Member> findOne(int memberId){
         return memberRepository.findById(memberId);
+    }
+
+    public Optional<Member> login(String email){
+        return memberRepository.findByEmail(email);
     }
 
 }

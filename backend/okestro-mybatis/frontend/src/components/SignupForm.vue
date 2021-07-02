@@ -40,6 +40,7 @@ export default {
 				password : this.password,
 			}
 			const {data} = await signupUser(userData);
+      console.log(userData);
 			console.log(data);
 			alert('등록성공'+ data);
 		}

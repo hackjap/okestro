@@ -44,10 +44,20 @@ public class JpaMemberRepository implements MemberRepository {
     }
 
     @Override
+    public Optional<Member> findByEmail(String email) {
+        List<Member> result = em.createQuery("select  m from Member m where m.email = :email", Member.class)
+                .setParameter("email",email)
+                .getResultList();
+        return result.stream().findAny();
+    }
+
+
+    @Override
     public List<Member> findAll() {
         // 객체 자체를 select하여 가져옴
         return em.createQuery("select m from Member m",Member.class)
                 .getResultList();
 
     }
+
 }

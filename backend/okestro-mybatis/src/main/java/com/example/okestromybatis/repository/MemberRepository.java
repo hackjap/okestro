@@ -9,6 +9,7 @@ public interface MemberRepository {
     Member save(Member member);
     Optional<Member> findById(int id); // Optional : null 값을 감싸서 반환
     Optional<Member> findByName(String name);
+    Optional<Member> findByEmail(String email);
     List<Member> findAll();
 
 

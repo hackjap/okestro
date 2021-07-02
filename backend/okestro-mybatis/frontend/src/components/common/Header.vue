@@ -1,14 +1,15 @@
 <template>
 	<header>
 		<div>
-			<router-link to="/" class="logo">
-    
+
         <div>
+          <router-link to="/" class="logo">
             {{this.$route.name}}
+          </router-link>
         </div>
 				
 				<!-- <span v-if="isUserLogin">by {{ $store.state.username }}</span> -->
-			</router-link>
+
 		</div>
 		<div class="navigations">
 			<!-- 1 -->
@@ -32,7 +33,8 @@ export default {
 	// computed: {
 	// 	isUserLogin() {
 	// 		return this.$store.getters.isLogin;
-	// 	},
+	// 	}
+	// }
 	// 	// logoLink() {
 	// 	// 	return this.$store.getters.isLogin ? '/main' : '/login';
 	// 	// },

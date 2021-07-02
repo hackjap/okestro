@@ -18,6 +18,10 @@ async function registerCompany(companyData){
 }
 
 // 로그인
+async function loginUser(userData){
+    const response = instance.post('login',userData);
+    return response;
+}
 
 async function signupUser(userData){
     const response = instance.post('signup',userData);
@@ -29,5 +33,5 @@ async function signupUser(userData){
 
 export {
 
-    fetchCompany,registerCompany,signupUser
+    fetchCompany,registerCompany,signupUser,loginUser
 }

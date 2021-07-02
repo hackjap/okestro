@@ -7,8 +7,8 @@
 					<input id="email" type="text" v-model="email" />
 				</div>
 				<div>
-					<label for="address">비밀번호 </label>
-					<input id="address" type="text" v-model="address" />
+					<label for="password">비밀번호 </label>
+					<input id="password" type="text" v-model="password" />
 				</div>
 			
 				<button type="submit" class="btn">로그인</button>
@@ -20,6 +20,8 @@
 
 <script>
 // import {registerCompany} from '../api/index.js';
+import {loginUser} from '../api/index';
+import store from '../store/index';
 export default {
 	data(){
 		return{
@@ -27,16 +29,38 @@ export default {
 			password : '',
 		}
 	},
+	
 	methods:{
-		// async submitForm(){
-		// 	const companyData = {
-		// 		name : this.name,
-		// 		address : this.address,
-		// 	}
-		// 	const {data} = await registerCompany(companyData);
-		// 	console.log(data);
-		// 	alert('등록성공'+ data);
-		// }
+		async submitForm(){
+			const userData = {
+				name : this.name,
+				password : this.password,
+
+			}
+			const {data} = await loginUser(userData);
+			console.log(data);
+		
+			const accessToken = data;
+			store.state.token  = accessToken;
+
+			if(accessToken != ''){
+				alert('환영합니다.'+ data);
+				this.$router.push('/');
+			}else{
+				alert('아이디 비밀번호를 확인하세요'+ data);
+			}
+			
+			this.initForm();
+
+			console.log( `STATE :${this.$store.state.token}`);
+
+		},
+
+		initForm(){
+			this.email = '',
+			this.password = '';
+		},
+
 	}
 }
 </script>
