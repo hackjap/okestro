@@ -1,7 +1,7 @@
 package jpa.jpabackend;
 
 import jpa.jpabackend.domain.Member;
-import jpa.jpabackend.repository.JpaMemberRepository;
+
 import jpa.jpabackend.repository.MemberRepository;
 import jpa.jpabackend.repository.MemoryMemberRepository;
 import jpa.jpabackend.service.MemberService;

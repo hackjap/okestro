@@ -124,9 +124,20 @@
 
 
 ### 스프링 데이터 JPA
-> 실무에서 RDB의 JPA 는 필수!! JPA에서의 편리성을 극대화 
+-  실무에서 RDB의 JPA 는 필수!! JPA에서의 편리성을 극대화 
 
+ > CRUD 등 다양하고 유용한 메소드를 제공.
+ > 하지만, 비즈니스 로직은 다음과 같이 정의해주어야 함
 
+    public interface SpringDataJpaMemberRepository extends JpaRepository<Member,Integer>,MemberRepository{
+
+    // 다음과 같은 쿼리문을 자동으로 제공 
+    // JPQL : select m from Member m where m.name = ?
+    @Override
+    Optional<Member> findByName(String name);
+}
+
+- 또한 JPA는 native 쿼리도 사용이 가능하므로 복잡한 경우 섞어서 사용하여도 무방하다.
 
 
 

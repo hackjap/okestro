@@ -9,6 +9,7 @@ import java.util.Optional;
 // 또한 인터페이스는 다중 상속이 가능함
 public interface SpringDataJpaMemberRepository extends JpaRepository<Member,Integer>,MemberRepository{
 
+    // JPQL : select m from Member m where m.name = ?
     @Override
     Optional<Member> findByName(String name);
 }
