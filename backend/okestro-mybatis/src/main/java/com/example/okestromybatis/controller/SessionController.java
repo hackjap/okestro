@@ -31,6 +31,6 @@ public class SessionController {
         System.out.println("Session :  " + session.getEmail());
         memberService.login(session.getEmail());
 
-        return "ajslkdfjl;kdsajf";
+        return "ajslkdfjl;kdsajf" + session.getEmail();
     }
 }

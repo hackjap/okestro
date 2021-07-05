@@ -29,7 +29,7 @@ export default {
 			password : '',
 		}
 	},
-	
+
 	methods:{
 		async submitForm(){
 			const userData = {
@@ -41,6 +41,7 @@ export default {
 			console.log(data);
 		
 			const accessToken = data;
+			
 			store.state.token  = accessToken;
 
 			if(accessToken != ''){
