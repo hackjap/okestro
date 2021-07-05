@@ -33,6 +33,11 @@
 - Spring boot 추가학습
   ( jpa, mvc, aop )
 
+### 7.5 (월) - Today 
+- 프로젝트 아이템 선정
+- 화면 구현 및 UI 설계 
+- 데이터베이스 설계 
+
 <!-- <details>
 <summary>6.29 (화) - 2일차</summary>
 <div markdown="1">       
