@@ -10,11 +10,11 @@
 		</template>
 		<v-list-item>
 			<v-list-item-content>
-				<v-list-item-title class="text-h6">
-					Application
+				<v-list-item-title class="text-h6 ">
+					COVID-VUE
 				</v-list-item-title>
-				<v-list-item-subtitle>
-					subtext
+				<v-list-item-subtitle class="mt-1">
+					장성필님 환영합니다.
 				</v-list-item-subtitle>
 			</v-list-item-content>
 		</v-list-item>
@@ -48,20 +48,20 @@ export default {
 	data: () => ({
 		gradient: 'rgba(0,0,0,.7), rgba(0,0,0,.7)',
 		items: [
-			{ title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/' },
-			{ title: 'Grid system', icon: 'mdi-image', to: '/gridsystem' },
-			{ title: 'Grid List', icon: 'mdi-image', to: '/gridlist' },
-			{ title: 'Break Points', icon: 'mdi-image', to: '/breakpoints' },
-			{ title: 'Typography', icon: 'mdi-image', to: '/typography' },
+			// { title: '오늘의 확진자', icon: 'mdi-view-dashboard', to: '/' },
+			// { title: 'Grid system', icon: 'mdi-image', to: '/gridsystem' },
+			// { title: 'Grid List', icon: 'mdi-image', to: '/gridlist' },
+			// { title: 'Break Points', icon: 'mdi-image', to: '/breakpoints' },
+			// { title: 'Typography', icon: 'mdi-image', to: '/typography' },
 
-			{ title: 'Tables', icon: 'mdi-image', to: '/tables' },
-			{ title: 'Buttons', icon: 'mdi-image', to: '/buttons' },
-			{ title: 'Icons', icon: 'mdi-image', to: '/icons' },
-			{ title: 'Forms', icon: 'mdi-image', to: '/forms' },
+			// { title: 'Tables', icon: 'mdi-image', to: '/tables' },
+			// { title: 'Buttons', icon: 'mdi-image', to: '/buttons' },
+			// { title: 'Icons', icon: 'mdi-image', to: '/icons' },
+			// { title: 'Forms', icon: 'mdi-image', to: '/forms' },
 
-			{ title: 'SignIn', icon: 'mdi-login', to: '/signin' },
-			{ title: 'SignUp', icon: 'mdi-logout', to: '/signup' },
-			{ title: 'ProductList', icon: 'mdi-image', to: '/productlist' },
+			{ title: '코로나 확진자', icon: 'mdi-image', to: '/chart' },
+			{ title: '로그인', icon: 'mdi-login', to: '/login' },
+			{ title: '회원가입', icon: 'mdi-logout', to: '/signup' },
 		],
 	}),
 };

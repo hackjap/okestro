@@ -83,12 +83,13 @@
 </template>
 <script>
 const exhale = ms => new Promise(resolve => setTimeout(resolve, ms));
-
+import { fetchData } from '../api/index';
 export default {
 	data: () => ({
 		checking: false,
 		heartbeats: [],
-		value: [423, 446, 675, 510, 590, 610, 760],
+		// value: [423, 446, 675, 510, 590, 610, 760],
+		value: [],
 	}),
 
 	computed: {
@@ -104,6 +105,8 @@ export default {
 
 	created() {
 		this.takePulse(false);
+		// this.value = fetchData();
+		this.fetchCovid();
 	},
 
 	methods: {
@@ -118,6 +121,29 @@ export default {
 			this.heartbeats = Array.from({ length: 20 }, this.heartbeat);
 
 			this.checking = false;
+		},
+
+		async fetchCovid() {
+			const { data } = await fetchData();
+			const result = data.response.body.items.item;
+			console.log(result);
+
+			// this.value = result;
+
+			const temp = [];
+			const patient = result;
+
+			console.log(patient[0].decideCnt);
+
+			// patient.forEach(value => {
+			// 	this.value = value.accDefRate;
+			// });
+			for (let i = 0; i < patient.length; i++) {
+				temp.push(patient[i].decideCnt);
+			}
+			console.log('VAULE : ' + temp);
+
+			this.value = temp.reverse();
 		},
 	},
 };
