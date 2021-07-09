@@ -83,7 +83,7 @@
 </template>
 <script>
 const exhale = ms => new Promise(resolve => setTimeout(resolve, ms));
-import { fetchData } from '../api/index';
+import { fetchData } from '../../api/index';
 export default {
 	data: () => ({
 		checking: false,

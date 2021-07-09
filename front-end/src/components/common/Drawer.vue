@@ -59,7 +59,12 @@ export default {
 			// { title: 'Icons', icon: 'mdi-image', to: '/icons' },
 			// { title: 'Forms', icon: 'mdi-image', to: '/forms' },
 
-			{ title: '코로나 확진자', icon: 'mdi-image', to: '/chart' },
+			{
+				title: '코로나 확진자',
+				icon: 'mdi-chart-line',
+				to: '/chart',
+			},
+			{ title: '코로나 맵', icon: 'mdi-map', to: '/map' },
 			{ title: '로그인', icon: 'mdi-login', to: '/login' },
 			{ title: '회원가입', icon: 'mdi-logout', to: '/signup' },
 		],

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 1998",
     "build": "vue-cli-service build",
     "lint": "eslint --ext .js,.vue src"
   },
@@ -36,6 +36,9 @@
     "root": true,
     "env": {
       "node": true
+    },
+    "globals": {
+      "kakao":false
     },
     "extends": [
       "plugin:vue/recommended",

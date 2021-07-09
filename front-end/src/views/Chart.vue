@@ -11,7 +11,7 @@
 </template>
 <script>
 import Chart from 'chart.js/auto';
-import { fetchData } from '../api/index';
+import { fetchPatient } from '../api/index';
 export default {
 	data: () => ({
 		store: [],
@@ -20,7 +20,7 @@ export default {
 
 	methods: {
 		async fetchCovid() {
-			const { data } = await fetchData();
+			const { data } = await fetchPatient();
 			const result = data.response.body.items.item;
 
 			// 코로나 확진자
