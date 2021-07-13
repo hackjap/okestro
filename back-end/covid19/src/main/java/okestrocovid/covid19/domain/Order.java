@@ -24,6 +24,11 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;  // 주문 회원
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;  // 주문 회원
+
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -39,6 +44,12 @@ public class Order {
     // == 연관관계 메서드 == //
     public void setMember(Member member) {
         this.member = member;
+        member.getOrders().add(this);
+    }
+
+    // == 연관관계 메서드 == //
+    public void setUser(User user) {
+        this.user = user;
         member.getOrders().add(this);
     }
 

@@ -21,6 +21,7 @@ public class Member
     private String address;
 
 
+
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 }

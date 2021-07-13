@@ -1,54 +1,43 @@
 <template>
-	<v-form ref="form" v-model="valid" lazy-validation>
-		<v-text-field
-			v-model="name"
-			:counter="10"
-			:rules="nameRules"
-			label="Name"
-			required
-		></v-text-field>
+	<v-card class="pa-3">
+		<v-form ref="form" v-model="valid" lazy-validation>
+			<v-select
+				v-model="users"
+				:items="data.users"
+				:rules="[v => !!v || 'Item is required']"
+				label="회원조회"
+				required
+			></v-select>
+			<v-select
+				v-model="vaccines"
+				:items="data.vaccines"
+				:rules="[v => !!v || 'Item is required']"
+				label="백신조회"
+				required
+			></v-select>
 
-		<v-text-field
-			v-model="email"
-			:rules="emailRules"
-			label="E-mail"
-			required
-		></v-text-field>
+			<v-text-field v-model="count" label="수량" required></v-text-field>
 
-		<v-text-field v-model="password" label="password" required></v-text-field>
-
-		<v-select
-			v-model="age"
-			:items="items"
-			:rules="[v => !!v || 'Item is required']"
-			label="Item"
-			required
-		></v-select>
-
-		<v-checkbox
-			v-model="checkbox"
-			:rules="[v => !!v || 'You must agree to continue!']"
-			label="Do you agree?"
-			required
-		></v-checkbox>
-
-		<v-btn :disabled="!valid" color="success" class="mr-4" @click="submitForm">
-			회원가입
-		</v-btn>
-
-		<v-btn color="error" class="mr-4" @click="reset">
-			초기화
-		</v-btn>
-	</v-form>
+			<v-btn
+				:disabled="!valid"
+				color="success"
+				class="mr-4"
+				@click="submitForm"
+			>
+				신청하기
+			</v-btn>
+		</v-form>
+	</v-card>
 </template>
 
 <script>
 import { signupUser } from '@/utils/index';
 export default {
 	data: () => ({
-		value: '',
+		users: '',
+		vaccines: '',
+		count: '',
 		valid: true,
-		name: '',
 
 		nameRules: [
 			v => !!v || 'Name is required',
@@ -59,10 +48,15 @@ export default {
 			v => !!v || 'E-mail is required',
 			v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
 		],
-		age: null,
-		items: ['10대', '20대', '30대', '40대', '50대', '60대이상'],
-		checkbox: false,
-		password: '',
+
+		// 여기에 사용자 데이터 받아오면댐
+		data: {
+			vaccines: ['A', 'B', 'C'],
+			users: ['UserA', 'UserB'],
+			count: '',
+			checkbox: false,
+			password: '',
+		},
 	}),
 
 	methods: {

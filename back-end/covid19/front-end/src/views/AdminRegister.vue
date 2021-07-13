@@ -2,24 +2,24 @@
 	<v-card>
 		<v-tabs fixed-tabs border-color="indigo" dark>
 			<v-tab class="display-1 primary" @click="firstTab">
-				신청하기
+				백신등록
 			</v-tab>
 			<v-tab class="display-1 primary" @click="secondTab">
-				신청확인
+				백신목록
 			</v-tab>
 		</v-tabs>
 		<template v-if="this.flag">
-			<VaccineForm></VaccineForm>
+			<VaccineRegistForm></VaccineRegistForm>
 		</template>
 		<template v-else>
-			<VaccineList></VaccineList>
+			<VaccineRegistList></VaccineRegistList>
 		</template>
 	</v-card>
 </template>
 
 <script>
-import VaccineList from '../components/VaccineList.vue';
-import VaccineForm from '../components/VaccineForm.vue';
+import VaccineRegistList from '../components/VaccineRegistList.vue';
+import VaccineRegistForm from '../components/VaccineRegistForm.vue';
 export default {
 	data() {
 		return {
@@ -27,8 +27,8 @@ export default {
 		};
 	},
 	components: {
-		VaccineForm,
-		VaccineList,
+		VaccineRegistForm,
+		VaccineRegistList,
 	},
 	methods: {
 		firstTab() {

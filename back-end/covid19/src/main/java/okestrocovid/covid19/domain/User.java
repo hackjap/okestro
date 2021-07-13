@@ -5,16 +5,26 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@RequiredArgsConstructor
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
+@Entity
 @Getter
 @Setter
 public class User {
 
-    private final  Long id;
-    private final String email;
-    private final String password;
+    @Id
+    @GeneratedValue
+    @Column(name = "user_id")
+    private Long id;
 
+    private String email;
+    private String password;
+    private String name;
+    private String age;
 
-
-
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
 }

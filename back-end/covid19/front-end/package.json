@@ -15,6 +15,7 @@
     "vue-chartjs": "^3.5.1",
     "vue-router": "^3.5.2",
     "vuetify": "^2.4.0",
+    "vuex": "^3.6.2",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
@@ -38,7 +39,7 @@
       "node": true
     },
     "globals": {
-      "kakao":false
+      "kakao": false
     },
     "extends": [
       "plugin:vue/recommended",

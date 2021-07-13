@@ -66,8 +66,11 @@ export default {
 			},
 			{ title: '코로나 맵', icon: 'mdi-map', to: '/map' },
 			{ title: '백신접종신청', icon: 'mdi-map', to: '/vaccine' },
-			{ title: '로그인', icon: 'mdi-login', to: '/login' },
-			{ title: '회원가입', icon: 'mdi-logout', to: '/signup' },
+			{
+				title: '관리자페이지',
+				icon: 'mdi-emoticon-devil-outline',
+				to: '/adminregister',
+			},
 		],
 	}),
 };

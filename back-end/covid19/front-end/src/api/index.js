@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 function fetchPatient() {
-	const response = axios.get('http://localhost:9999/covid');
+	const response = axios.get('http://localhost:8888/covid');
 	// var result = data.response.body.items.item;
 	return response;
 }

@@ -10,7 +10,6 @@
 		<v-text-field
 			v-model="password"
 			:append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-			:rules="[rules.required, rules.min]"
 			:type="show1 ? 'text' : 'password'"
 			name="input-10-1"
 			label="Normal with hint text"
@@ -18,8 +17,8 @@
 			counter
 			@click:append="show1 = !show1"
 		></v-text-field>
-
-		<v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
+		<!-- :rules="[rules.required, rules.min]" -->
+		<v-btn :disabled="!valid" color="success" class="mr-4" @click="submitForm">
 			로그인
 		</v-btn>
 
@@ -34,9 +33,14 @@
 </template>
 
 <script>
+import { loginUser } from '@/utils/index';
+import { saveUserToCookie } from '@/utils/index';
 export default {
 	data: () => ({
+		user: [],
 		email: '',
+		password: '',
+		valid: '',
 		emailRules: [
 			v => !!v || 'E-mail is required',
 			v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -47,7 +51,7 @@ export default {
 		show2: true,
 		show3: false,
 		show4: false,
-		password: '',
+
 		rules: {
 			required: value => !!value || 'Required.',
 			min: v => v.length >= 8 || 'Min 8 characters',
@@ -60,6 +64,31 @@ export default {
 	}),
 
 	methods: {
+		async submitForm() {
+			this.validate();
+			const userData = {
+				email: this.email,
+				password: this.password,
+			};
+			try {
+				const { data } = await loginUser(userData);
+				console.log(userData);
+				this.user = data.findUsers; // user 배열
+				console.log();
+				const userEmail = this.user[0].email;
+
+				saveUserToCookie(userEmail);
+				this.$store.commit('setName', userEmail);
+				const val = this.user[0].email != '';
+				if (val) {
+					alert(`${this.user[0].email}님 환영합니다!`);
+					this.$router.push('/home');
+				}
+			} catch (error) {
+				alert(`아이디 비밀번호를 확인하세요`);
+			}
+		},
+
 		validate() {
 			this.$refs.form.validate();
 		},
