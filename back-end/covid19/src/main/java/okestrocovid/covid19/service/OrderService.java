@@ -2,10 +2,7 @@ package okestrocovid.covid19.service;
 
 import lombok.RequiredArgsConstructor;
 import okestrocovid.covid19.domain.*;
-import okestrocovid.covid19.repository.ItemRepository;
-import okestrocovid.covid19.repository.MemberRepository;
-import okestrocovid.covid19.repository.OrderRepository;
-import okestrocovid.covid19.repository.OrderSearch;
+import okestrocovid.covid19.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,16 +13,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
 
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
     private  final OrderRepository orderRepository;
     private final ItemRepository itemRepository;
 
     // ** 주문 /
     @Transactional
-    public Long order(Long memberId, Long itemId, int count) {
+    public Long order(Long userId, Long itemId, int count) {
 
         // 엔티티 조회
-        Member member = memberRepository.findOne(memberId);
+        User user = userRepository.findOne(userId);
         Item item = itemRepository.findOne(itemId);
 
         // 치료정보 생성
@@ -36,7 +33,7 @@ public class OrderService {
         OrderItem orderItem = OrderItem.createOrderItem(item, count);
 
         // 신청 생성
-        Order order = Order.createOrder(member, cure, orderItem);
+        Order order = Order.createOrder(user, cure, orderItem);
 
         // 주문 저장
         orderRepository.save(order);
@@ -55,8 +52,11 @@ public class OrderService {
         order.cancel();
     }
 
+    public List<Order>findOrders(){
+        return orderRepository.findAll();
+    }
     // 검색
-    public List<Order> findOrders(OrderSearch orderSearch) {
+    public List<Order> findSearch(OrderSearch orderSearch) {
         return orderRepository.findAllByCriteria(orderSearch);
     }
 

@@ -32,7 +32,7 @@
 
 <script>
 import { fetchRegistedVaccine } from '@/api/index';
-import { signupUser, fetchUserList } from '@/utils/index';
+import { signupUser, fetchUserList, orderVaccine } from '@/utils/index';
 export default {
 	async mounted() {
 		const response = await fetchRegistedVaccine();

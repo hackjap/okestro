@@ -50,6 +50,13 @@ function registVaccine(formData) {
 	return response;
 }
 
+function orderVaccine(userId, orderId, count) {
+	const response = axios.post(
+		`http://localhost:8888/order/?userId=${userId}&itemId=${orderId}&count=${count}`,
+	);
+	return response;
+}
+
 export {
 	saveAuthToCookie,
 	saveUserToCookie,
@@ -60,4 +67,5 @@ export {
 	signupUser,
 	registVaccine,
 	fetchUserList,
+	orderVaccine,
 };

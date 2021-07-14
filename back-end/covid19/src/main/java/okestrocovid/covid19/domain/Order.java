@@ -50,7 +50,7 @@ public class Order {
     // == 연관관계 메서드 == //
     public void setUser(User user) {
         this.user = user;
-        member.getOrders().add(this);
+        user.getOrders().add(this);
     }
 
     public void addOrderItem(OrderItem orderItem) {
@@ -64,9 +64,9 @@ public class Order {
     }
 
     // == 생성 메서드 == /
-    public static Order createOrder(Member member, Cure cure, OrderItem... orderItems) {
+    public static Order createOrder(User user, Cure cure, OrderItem... orderItems) {
         Order order = new Order();
-        order.setMember(member);
+        order.setUser(user);
         order.setCure(cure);
         for (OrderItem orderItem : orderItems) {
             order.addOrderItem(orderItem);

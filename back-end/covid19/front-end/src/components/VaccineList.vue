@@ -18,22 +18,27 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="item in desserts" :key="item.name">
+				<tr v-for="item in items" :key="item.name">
 					<td>{{ item.name }}</td>
-					<td>{{ item.category }}</td>
-					<td>{{ item.price }}</td>
-					<td>{{ item.count }}</td>
+					<td>{{ item.orderDate }}</td>
+					<td>{{ item.orderStatus }}</td>
 				</tr>
 			</tbody>
 		</template>
 	</v-simple-table>
 </template>
 <script>
+import { fetchOrders } from '@/api/index';
 export default {
 	data() {
 		return {
-			desserts: [],
+			items: [],
 		};
+	},
+	async mounted() {
+		const { data } = await fetchOrders();
+		console.log(data);
+		this.items = data;
 	},
 };
 </script>
