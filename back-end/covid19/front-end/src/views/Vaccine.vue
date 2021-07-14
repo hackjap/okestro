@@ -23,7 +23,7 @@ import VaccineForm from '../components/VaccineForm.vue';
 export default {
 	data() {
 		return {
-			flag: false,
+			flag: true,
 		};
 	},
 	components: {

@@ -2,14 +2,25 @@
 	<v-card class="pa-3">
 		<v-form ref="form" v-model="valid" lazy-validation>
 			<v-text-field
-				v-model="users"
-				:items="data.users"
+				v-model="formData.vaccine"
 				label="백신명"
 				required
 			></v-text-field>
-			<v-text-field v-model="count" label="가격" required></v-text-field>
-			<v-text-field v-model="count" label="수량" required></v-text-field>
-			<v-text-field v-model="count" label="원산지" required></v-text-field>
+			<v-text-field
+				v-model="formData.price"
+				label="가격"
+				required
+			></v-text-field>
+			<v-text-field
+				v-model="formData.quantity"
+				label="수량"
+				required
+			></v-text-field>
+			<v-text-field
+				v-model="formData.country"
+				label="원산지"
+				required
+			></v-text-field>
 			<v-btn
 				:disabled="!valid"
 				color="success"
@@ -23,12 +34,16 @@
 </template>
 
 <script>
-import { signupUser } from '@/utils/index';
+import { registVaccine } from '@/utils/index';
 export default {
 	data: () => ({
+		formData: {
+			vaccine: '',
+			price: ' ',
+			quantity: '',
+			count: '',
+		},
 		users: '',
-		vaccines: '',
-		count: '',
 		valid: true,
 
 		nameRules: [
@@ -43,8 +58,8 @@ export default {
 
 		// 여기에 사용자 데이터 받아오면댐
 		data: {
-			vaccines: ['A', 'B', 'C'],
-			users: ['UserA', 'UserB'],
+			vaccines: [],
+			users: [],
 			count: '',
 			checkbox: false,
 			password: '',
@@ -55,24 +70,23 @@ export default {
 		async submitForm() {
 			this.validate();
 			const userData = {
-				email: this.email,
-				password: this.password,
-				name: this.name,
-				age: this.age,
+				name: this.formData.vaccine,
+				price: this.formData.price,
+				stockQuantity: this.formData.quantity,
+				country: this.formData.country,
 			};
 			try {
-				const { data } = await signupUser(userData);
+				const { data } = await registVaccine(userData);
 				console.log(userData);
 				// this.value = data.findUsers; // user 배열
 				console.log(data);
 				this.value = data.name;
-				if (this.value != '') alert(`${data.name}님 가입을 환영합니다.`);
-				else throw '올바른 정보를 입력하세요';
 
-				this.$router.push('/home');
+				alert('등록완료');
+				this.initForm();
 			} catch (error) {
 				alert(`올바른 정보를 입력하세요`);
-				this.$router.push('/signup');
+				this.$router.push('/adminregister');
 			}
 		},
 
@@ -82,6 +96,12 @@ export default {
 		reset() {
 			this.$refs.form.reset();
 			this.resetValidation();
+		},
+		initForm() {
+			(this.formData.vaccine = ' '),
+				(this.formData.price = ''),
+				(this.formData.quantity = ' '),
+				(this.formData.country = '');
 		},
 	},
 };

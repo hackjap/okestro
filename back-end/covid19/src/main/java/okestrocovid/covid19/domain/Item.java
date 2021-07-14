@@ -17,7 +17,9 @@ public  class Item {
     private Long id;
 
     private String name;
+    private int price;
     private int stockQuantity;
+    private String country;
 
     /**
      * 비즈니스 로직

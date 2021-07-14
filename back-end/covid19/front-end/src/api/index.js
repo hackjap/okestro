@@ -13,4 +13,9 @@ function fetchVaccine() {
 	return response;
 }
 
-export { fetchPatient, fetchVaccine };
+function fetchRegistedVaccine() {
+	const response = axios.get('http://localhost:8888/items');
+	return response;
+}
+
+export { fetchPatient, fetchVaccine, fetchRegistedVaccine };

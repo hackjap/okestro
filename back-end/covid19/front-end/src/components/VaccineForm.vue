@@ -31,9 +31,29 @@
 </template>
 
 <script>
-import { signupUser } from '@/utils/index';
+import { fetchRegistedVaccine } from '@/api/index';
+import { signupUser, fetchUserList } from '@/utils/index';
 export default {
+	async mounted() {
+		const response = await fetchRegistedVaccine();
+		const { data } = await fetchUserList(); // 유저목록
+		const fetchedVaccin = response.data; // 백신목록
+
+		console.log(response.data);
+		data.data.forEach(element => {
+			this.data.users.push(element.name);
+		});
+
+		fetchedVaccin.forEach(element2 => {
+			this.data.vaccines.push(element2.name);
+		});
+	},
 	data: () => ({
+		userData: {
+			username: [],
+		},
+		vaccineData: {},
+
 		users: '',
 		vaccines: '',
 		count: '',
@@ -51,8 +71,8 @@ export default {
 
 		// 여기에 사용자 데이터 받아오면댐
 		data: {
-			vaccines: ['A', 'B', 'C'],
-			users: ['UserA', 'UserB'],
+			vaccines: [],
+			users: [],
 			count: '',
 			checkbox: false,
 			password: '',

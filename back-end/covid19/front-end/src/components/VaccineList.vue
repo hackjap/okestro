@@ -32,27 +32,7 @@
 export default {
 	data() {
 		return {
-			desserts: [
-				{
-					name: '장성필',
-					category: '화이자1',
-					price: 100000,
-					count: 159,
-				},
-				{
-					name: '장성필',
-					category: '화이자2',
-					price: 100000,
-					count: 159,
-				},
-
-				{
-					name: '장성필',
-					category: '화이자3',
-					price: 100000,
-					count: 159,
-				},
-			],
+			desserts: [],
 		};
 	},
 };

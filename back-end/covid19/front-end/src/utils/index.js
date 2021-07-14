@@ -12,6 +12,10 @@ function signupUser(userData) {
 	const response = axios.post(url, userData);
 	return response;
 }
+function fetchUserList() {
+	const response = axios.get('http://localhost:8888/users');
+	return response;
+}
 
 // cookie
 function saveAuthToCookie(value) {
@@ -40,6 +44,12 @@ function deleteCookie(value) {
 	document.cookie = `${value}=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
 }
 
+// 관리자 등록 API
+function registVaccine(formData) {
+	const response = axios.post('http://localhost:8888/items/new', formData);
+	return response;
+}
+
 export {
 	saveAuthToCookie,
 	saveUserToCookie,
@@ -48,4 +58,6 @@ export {
 	deleteCookie,
 	loginUser,
 	signupUser,
+	registVaccine,
+	fetchUserList,
 };

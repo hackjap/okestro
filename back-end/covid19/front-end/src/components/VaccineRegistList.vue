@@ -4,32 +4,34 @@
 			<thead>
 				<tr>
 					<th class="text-left">
-						회원명
-					</th>
-					<th class="text-left">
-						백신종류
+						백신명
 					</th>
 					<th class="text-left">
 						가격
 					</th>
-					<th class="text-left"></th>
+					<th class="text-left">수량</th>
+
+					<th class="text-left">국가</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="item in desserts" :key="item.name">
-					<td>{{ item.name }}</td>
-					<td>{{ item.category }}</td>
-					<td>{{ item.price }}</td>
-					<td>{{ item.count }}</td>
+				<tr v-for="data in datas" :key="data.name">
+					<td>{{ data.name }}</td>
+					<td>{{ data.price }}</td>
+					<td>{{ data.stockQuantity }}</td>
+					<td>{{ data.country }}</td>
 				</tr>
 			</tbody>
 		</template>
 	</v-simple-table>
 </template>
 <script>
+import { fetchRegistedVaccine } from '@/api/index';
+
 export default {
 	data() {
 		return {
+			datas: [],
 			desserts: [
 				{
 					name: '장성필1',
@@ -45,13 +47,19 @@ export default {
 				},
 
 				{
-					name: '장성필3',
+					name: '장성필3	',
 					category: '화이자3',
 					price: 100000,
 					count: 159,
 				},
 			],
 		};
+	},
+
+	async mounted() {
+		const vaccineList = await fetchRegistedVaccine();
+		console.log(vaccineList.data);
+		this.datas = vaccineList.data;
 	},
 };
 </script>
