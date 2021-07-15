@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-function fetchPatient() {
-	const response = axios.get('http://localhost:8888/covid');
+function fetchPatient(date) {
+	const response = axios.get(`http://localhost:8888/covid/week?date=${date}`);
 	// var result = data.response.body.items.item;
 	return response;
 }

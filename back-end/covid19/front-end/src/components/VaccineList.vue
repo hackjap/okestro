@@ -31,6 +31,7 @@
 </template>
 <script>
 import { fetchOrders } from '@/api/index';
+
 export default {
 	data() {
 		return {

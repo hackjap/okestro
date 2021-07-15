@@ -29,13 +29,13 @@ public class TestApiService {
 //                .build();
 //    }
 
-    public String getFirstTodosTest() throws IOException {
+    public String getFirstTodosTest(int date) throws IOException {
 //        String response =
 //                this.webClient.get()
 //                .retrieve().bodyToMono(String.class)
 //                .block();
 
-        return covid.fetchData();
+        return covid.fetchData(date);
 
     }
 

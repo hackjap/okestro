@@ -15,7 +15,7 @@ import java.util.Date;
 @Service
 public class Covid {
 
-    public String fetchData() throws IOException {
+    public String fetchData(int i) throws IOException {
 
         String pattern = "yyyyMMdd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -24,7 +24,7 @@ public class Covid {
 
         // 일주일 전 날짜
         Calendar week = Calendar.getInstance();
-        week.add(Calendar.DATE,-7);
+        week.add(Calendar.DATE,-i);
         String beforeWeek = simpleDateFormat.format(week.getTime());
         System.out.println("!!!!!!!!!!!"+ today + " : " + beforeWeek );
 

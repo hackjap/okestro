@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -26,10 +27,25 @@ public class TestApiController {
     }
 
     @CrossOrigin("*")
-    @GetMapping("covid")
-    public String TestWebClient(Model model) throws IOException {
+    @GetMapping("covid/week")
+    public String fetcgWeek(@RequestParam("date") int date ) throws IOException {
 //        Model model = null;
-        String xmlResponse = testApiService.getFirstTodosTest();
+        String xmlResponse = testApiService.getFirstTodosTest(date);
+
+        JSONObject jsonpObject = XML.toJSONObject(xmlResponse);
+
+        String response = jsonpObject.toString();
+
+//        String a =" hi";
+//        model.addAttribute("response", response);
+        log.info(xmlResponse);
+        return response;
+    }
+    @CrossOrigin("*")
+    @GetMapping("covid/month")
+    public String fetchMonth(@RequestParam String Date ) throws IOException {
+//        Model model = null;
+        String xmlResponse = testApiService.getFirstTodosTest(-10);
 
         JSONObject jsonpObject = XML.toJSONObject(xmlResponse);
 
