@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class UserListDto {
+    private Long id;
     private String name;
-    private String age;
 
 //    private String token;
 

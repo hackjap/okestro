@@ -35,6 +35,11 @@ public class ItemRepository {
         return  em.find(Item.class, id);
     }
 
+//    // dlfmah찾기
+//    public Item findOne(Long id) {
+//        return  em.find(Item.class, id);
+//    }
+
     // 전체 찾기
     public List<Item> findAll() {
         return em.createQuery("select i from Item i ",Item.class).getResultList();

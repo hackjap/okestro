@@ -2,15 +2,19 @@
 	<v-card class="pa-3">
 		<v-form ref="form" v-model="valid" lazy-validation>
 			<v-select
-				v-model="users"
-				:items="data.users"
+				v-model="userId"
+				:items="select.userList"
+				item-text="name"
+				item-value="id"
 				:rules="[v => !!v || 'Item is required']"
 				label="회원조회"
 				required
 			></v-select>
 			<v-select
-				v-model="vaccines"
-				:items="data.vaccines"
+				v-model="vaccineId"
+				:items="select.vaccineList"
+				item-text="name"
+				item-value="id"
 				:rules="[v => !!v || 'Item is required']"
 				label="백신조회"
 				required
@@ -32,31 +36,28 @@
 
 <script>
 import { fetchRegistedVaccine } from '@/api/index';
-import { signupUser, fetchUserList, orderVaccine } from '@/utils/index';
+import { fetchUserList, orderVaccine } from '@/utils/index';
+
 export default {
 	async mounted() {
 		const response = await fetchRegistedVaccine();
 		const { data } = await fetchUserList(); // 유저목록
 		const fetchedVaccin = response.data; // 백신목록
-
-		console.log(response.data);
+		// console.log(data.data);
+		// console.log(response.data);
 		data.data.forEach(element => {
-			this.data.users.push(element.name);
+			this.select.userList.push(element);
 		});
 
 		fetchedVaccin.forEach(element2 => {
-			this.data.vaccines.push(element2.name);
+			this.select.vaccineList.push(element2);
 		});
 	},
 	data: () => ({
-		userData: {
-			username: [],
-		},
-		vaccineData: {},
-
-		users: '',
-		vaccines: '',
-		count: '',
+		// select v-model
+		userId: '', // 유저아이디
+		vaccineId: '', // 백신아이디
+		count: '', // 수량
 		valid: true,
 
 		nameRules: [
@@ -70,37 +71,29 @@ export default {
 		],
 
 		// 여기에 사용자 데이터 받아오면댐
-		data: {
-			vaccines: [],
-			users: [],
+		select: {
+			userList: [],
+			vaccineList: [],
+
 			count: '',
 			checkbox: false,
 			password: '',
 		},
 	}),
-
 	methods: {
 		async submitForm() {
-			this.validate();
-			const userData = {
-				email: this.email,
-				password: this.password,
-				name: this.name,
-				age: this.age,
+			const orderData = {
+				userId: this.userId,
+				itemId: this.vaccineId,
+				count: this.count,
 			};
+			console.log(orderData);
 			try {
-				const { data } = await signupUser(userData);
-				console.log(userData);
-				// this.value = data.findUsers; // user 배열
-				console.log(data);
-				this.value = data.name;
-				if (this.value != '') alert(`${data.name}님 가입을 환영합니다.`);
-				else throw '올바른 정보를 입력하세요';
-
-				this.$router.push('/home');
+				await orderVaccine(orderData);
+				alert('등록완료');
+				this.initForm();
 			} catch (error) {
-				alert(`올바른 정보를 입력하세요`);
-				this.$router.push('/signup');
+				alert('올바른 정보를 입력하세요');
 			}
 		},
 
@@ -110,6 +103,9 @@ export default {
 		reset() {
 			this.$refs.form.reset();
 			this.resetValidation();
+		},
+		initForm() {
+			(this.userId = ''), (this.itemId = ''), (this.count = 1);
 		},
 	},
 };

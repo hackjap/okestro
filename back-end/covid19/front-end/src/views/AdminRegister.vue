@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-tabs fixed-tabs border-color="indigo" dark>
-			<v-tab class="display-1 primary" @click="firstTab">
+			<v-tab class=" display-1 primary" @click="firstTab">
 				백신등록
 			</v-tab>
 			<v-tab class="display-1 primary" @click="secondTab">

@@ -47,6 +47,7 @@ public class Order {
         member.getOrders().add(this);
     }
 
+
     // == 연관관계 메서드 == //
     public void setUser(User user) {
         this.user = user;

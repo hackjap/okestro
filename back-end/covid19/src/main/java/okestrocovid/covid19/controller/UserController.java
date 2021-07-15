@@ -50,10 +50,11 @@ public class UserController {
         // 컬렉션에 한번 감싸서 향후 필요한 필드를 추가할 수 있음
         List<User> findMembers = userService.findUsers();
         List<UserListDto> collect = findMembers.stream()
-                .map(m -> new UserListDto(m.getName(),m.getAge()))
+                .map(m -> new UserListDto(m.getId(),m.getName()))
                 .collect(Collectors.toList());
         return new Result(collect);
     }
+
 
     @Data
     @AllArgsConstructor

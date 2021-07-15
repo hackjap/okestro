@@ -2,12 +2,13 @@ package okestrocovid.covid19.controller;
 
 import lombok.RequiredArgsConstructor;
 import okestrocovid.covid19.domain.Item;
+import okestrocovid.covid19.dto.SimpleItemDto;
 import okestrocovid.covid19.service.ItemService;
-import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin("*")
 @RestController
@@ -34,10 +35,13 @@ public class ItemController {
      * 상품 목록
      */
     @GetMapping("/items")
-    public List<Item> list() {
+    public List<SimpleItemDto> list() {
         List<Item> items = itemService.findItems();
+        List<SimpleItemDto> result = items.stream()
+                .map(i -> new SimpleItemDto(i.getId(),i.getName(),i.getPrice(), i.getStockQuantity(),i.getCountry()))
+                .collect(Collectors.toList());
 
-        return items;
+        return result;
     }
 
     /**

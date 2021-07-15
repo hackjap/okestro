@@ -50,9 +50,11 @@ function registVaccine(formData) {
 	return response;
 }
 
-function orderVaccine(userId, orderId, count) {
+function orderVaccine(orderData) {
 	const response = axios.post(
-		`http://localhost:8888/order/?userId=${userId}&itemId=${orderId}&count=${count}`,
+		// `http://localhost:8888/order/?userId=${userId}&itemId=${orderId}&count=${count}`
+		'http://localhost:8888/order/',
+		orderData,
 	);
 	return response;
 }

@@ -10,14 +10,16 @@ import java.time.LocalDateTime;
 @Data
 public class SimpleOrderDto {
     private Long orderId;
-    private String name;
+    private String userName;
+    private String orderName;
     private LocalDateTime orderDate;
     private OrderStatus orderStatus;
 
 
     public SimpleOrderDto(Order order){
         orderId = order.getId();
-        name = order.getUser().getName();
+        userName = order.getUser().getName();
+        orderName = order.getOrderItems().get(0).getItem().getName();
         orderDate = order.getOrderDate();
         orderStatus = order.getStatus();
 

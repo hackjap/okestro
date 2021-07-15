@@ -65,4 +65,12 @@ public class OrderRepository {
         ).getResultList();
     }
 
+    public List<OrderSimpleQueryDto> findOrderDto() {
+        return  em.createQuery("select new okestrocovid.covid19.repository.OrderSimpleQueryDto(o.id,m.name,o.orderDate,o.status)  " +
+                " from Order o" +
+                " join o.member m " +
+                " join o.cure c ", OrderSimpleQueryDto.class)
+        .getResultList();
+    }
+
 }

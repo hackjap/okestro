@@ -6,6 +6,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		name: '',
+
+		user: {},
+		order: {},
+		vaccine: {},
 	},
 	getters: {
 		isLogin(state) {

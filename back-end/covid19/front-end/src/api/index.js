@@ -19,7 +19,7 @@ function fetchRegistedVaccine() {
 }
 
 function fetchOrders() {
-	const response = axios.get('http://localhost:8888/orders/v1');
+	const response = axios.get('http://localhost:8888/orders/');
 	return response;
 }
 

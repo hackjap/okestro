@@ -42,11 +42,11 @@ public class OrderController {
 
     // 주문
     @PostMapping(value = "/order")
-    public String order(@RequestParam("userId") Long userId,
-                        @RequestParam("itemId") Long itemId,
-                        @RequestParam("count") int count) {
+    public String order(@RequestBody OrderForm form){
 
-        orderService.order(userId, itemId, count);
+//        Order order = new Order();
+
+        orderService.order(form.getUserId(),form.getItemId(),form.getCount());
         return "주문완료";
 
     }
@@ -54,20 +54,14 @@ public class OrderController {
     /**
      * 주문 목록 검색, 취소
      */
+
+
     @GetMapping("/orders")
-    public  List<Order> orderList() {
-
-        List<Order> orders = orderService.findOrders();
-
-        return orders;
-    }
-
-    @GetMapping("/orders/v1")
     public  List<SimpleOrderDto> orders() {
 
         List<Order> orders = orderRepository.findAllWithUserDelivery();
         List<SimpleOrderDto>result = orders.stream()
-                .map(o ->new SimpleOrderDto(o))
+                .map(o -> new SimpleOrderDto(o))
                 .collect(Collectors.toList());
 
         return result;
