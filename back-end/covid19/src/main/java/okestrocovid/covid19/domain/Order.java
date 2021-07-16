@@ -39,11 +39,11 @@ public class Order {
     private LocalDateTime orderDate; // 신청 시간
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;  // 신청 상태 ( ORDER, CANCEL )
+    private CureStatus status;  // 신청 상태 ( ORDER, CANCEL )
 
     // == 연관관계 메서드 == //
     public void setMember(Member member) {
-        this.member = member;
+        this.member =member;
         member.getOrders().add(this);
     }
 
@@ -72,7 +72,7 @@ public class Order {
         for (OrderItem orderItem : orderItems) {
             order.addOrderItem(orderItem);
         }
-        order.setStatus(OrderStatus.ORDER);
+        order.setStatus(CureStatus.예방접종대기);
         order.setOrderDate(LocalDateTime.now());
         return order;
     }
@@ -83,14 +83,15 @@ public class Order {
 
     // 주문 취소
     public void cancel() {
-        if (cure.getStatus() == CureStatus.CURE) {
-            throw new IllegalStateException("이미 에약된 백신은 취소가 불가능합니다");
+        if (cure.getStatus() == CureStatus.예방접종완료) {
+            throw new IllegalStateException("이미 접종하신 백신은 취소가 불가능합니다");
         }
-        this.setStatus(OrderStatus.CANCEL);
+        this.setStatus(CureStatus.예약취소);
         for (OrderItem orderItem : orderItems) {
             orderItem.cancel();
         }
     }
+
 
 
 

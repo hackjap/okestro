@@ -9,6 +9,7 @@ import okestrocovid.covid19.domain.User;
 import okestrocovid.covid19.dto.SimpleOrderDto;
 import okestrocovid.covid19.repository.OrderRepository;
 import okestrocovid.covid19.repository.OrderSearch;
+import okestrocovid.covid19.repository.OrdersRepository;
 import okestrocovid.covid19.service.ItemService;
 import okestrocovid.covid19.service.MemberService;
 import okestrocovid.covid19.service.OrderService;
@@ -22,12 +23,15 @@ import java.util.stream.Collectors;
 
 @CrossOrigin("*")
 @RestController
+@RequestMapping("orders")
+
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
     private final UserService userService;
     private final ItemService itemService;
     private final OrderRepository orderRepository;
+    private final OrdersRepository ordersRepository;
 //    @GetMapping("/order")
 //    public String createForm(@RequestBody Order model) {
 //
@@ -41,7 +45,7 @@ public class OrderController {
 //    }
 
     // 주문
-    @PostMapping(value = "/order")
+    @PostMapping(value = "")
     public String order(@RequestBody OrderForm form){
 
 //        Order order = new Order();
@@ -56,7 +60,7 @@ public class OrderController {
      */
 
 
-    @GetMapping("/orders")
+    @GetMapping("list")
     public  List<SimpleOrderDto> orders() {
 
         List<Order> orders = orderRepository.findAllWithUserDelivery();
@@ -71,13 +75,28 @@ public class OrderController {
      * 주문 취소
      */
 
-    @PostMapping("/orders/{orderId}/cancel")
+    @PostMapping("{orderId}/cancel")
     public String cancelOrder(@PathVariable("orderId")Long orderId){
 
         orderService.cancelOrder(orderId);
 
-        return "redirect:/orders";
+        return "예약취소 완료";
     }
+
+    /**
+     * 주문 삭제
+     */
+
+    @DeleteMapping("{orderId}/delete")
+    public String deleteOrder(@PathVariable("orderId")Long orderId){
+
+        orderService.deleteOrder(orderId);
+
+        return "예약삭제 완료";
+    }
+
+
+
 
 
 }

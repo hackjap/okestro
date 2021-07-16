@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { registVaccine } from '@/utils/index';
+import { registVaccine } from '@/api/index';
 export default {
 	data: () => ({
 		formData: {

@@ -31,16 +31,12 @@
 				신청하기
 			</v-btn>
 		</v-form>
-
-		<vaccine-regist-list></vaccine-regist-list>
 	</v-card>
 </template>
 
 <script>
-import { fetchRegistedVaccine } from '@/api/index';
-import { fetchUserList, orderVaccine } from '@/utils/index';
+import { fetchRegistedVaccine, fetchUserList, orderVaccine } from '@/api/index';
 
-import VaccineRegistList from '@/components/VaccineRegistList.vue';
 export default {
 	async mounted() {
 		const response = await fetchRegistedVaccine();
@@ -111,9 +107,7 @@ export default {
 			(this.userId = ''), (this.itemId = ''), (this.count = 1);
 		},
 	},
-	components: {
-		VaccineRegistList,
-	},
+	components: {},
 };
 </script>
 

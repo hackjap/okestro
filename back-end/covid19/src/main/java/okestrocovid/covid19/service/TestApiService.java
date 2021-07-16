@@ -1,23 +1,21 @@
 package okestrocovid.covid19.service;
 
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
-
-
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
-import java.net.URLEncoder;
+
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TestApiService {
 //    private final WebClient webClient;
 
-    @Autowired
-    Covid covid;
+
+    private final Covid covid;
 
 //    Covid covid =new Covid();
 

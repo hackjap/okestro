@@ -2,11 +2,11 @@ package okestrocovid.covid19.controller;
 
 
 import lombok.extern.slf4j.Slf4j;
+
 import okestrocovid.covid19.service.TestApiService;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +18,7 @@ import java.io.IOException;
 @RestController
 public class TestApiController {
 
-    final TestApiService testApiService;
+    private final TestApiService testApiService;
 
 
     @Autowired

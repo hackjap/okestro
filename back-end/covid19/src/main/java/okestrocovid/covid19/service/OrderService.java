@@ -16,7 +16,7 @@ public class OrderService {
     private final UserRepository userRepository;
     private  final OrderRepository orderRepository;
     private final ItemRepository itemRepository;
-
+    private final OrdersRepository ordersRepository;
     // ** 주문 /
     @Transactional
     public Long order(Long userId, Long itemId, int count) {
@@ -25,9 +25,10 @@ public class OrderService {
         User user = userRepository.findOne(userId);
         Item item = itemRepository.findOne(itemId);
 
+
         // 치료정보 생성
         Cure cure = new Cure();
-        cure.setStatus(CureStatus.READY);
+        cure.setStatus(CureStatus.예방접종대기);
 
         // 신청백신생성
         OrderItem orderItem = OrderItem.createOrderItem(item, count);
@@ -53,6 +54,21 @@ public class OrderService {
         // 주문 취소
         order.cancel();
     }
+
+    // ** 주문 삭제 **
+    @Transactional
+    public void deleteOrder(Long orderId) {
+
+        ordersRepository.deleteById(orderId);
+
+//        // 주문 엔티티 조회
+//        Order order = orderRepository.findOne(orderId);
+//
+//        // 주문 취소
+//        order.cancel();
+    }
+
+
 
     public List<Order>findOrders(){
         return orderRepository.findAll();

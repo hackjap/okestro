@@ -3,6 +3,7 @@ package okestrocovid.covid19.service;
 
 import lombok.RequiredArgsConstructor;
 import okestrocovid.covid19.domain.User;
+
 import okestrocovid.covid19.dto.LoginUserRequest;
 import okestrocovid.covid19.repository.UserRepository;
 import org.springframework.stereotype.Service;

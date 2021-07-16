@@ -11,7 +11,8 @@
 		<v-form ref="form">
 			<span>
 				<v-text-field v-model="date" label="날짜" required></v-text-field>
-				<v-btn class="mt-5" @click="reload"> 가져오기 </v-btn>
+				<v-btn class="mt-5" @click="getWeek"> 일주일 </v-btn>
+				<v-btn class="mt-5" @click="getMonth"> 한달 </v-btn>
 			</span>
 		</v-form>
 	</v-container>
@@ -27,8 +28,8 @@ export default {
 	}),
 
 	methods: {
-		async fetchCovid() {
-			const { data } = await fetchPatient(30);
+		async fetchCovid(date) {
+			const { data } = await fetchPatient(date);
 			// 코로나 확진자 가져오기
 			const patients = data.response.body.items.item;
 
@@ -40,22 +41,10 @@ export default {
 				console.log(patients[i].decideCnt);
 			}
 			this.value = temp.reverse();
-		},
-		async reload() {
-			const { data } = await fetchPatient(10);
-			// 코로나 확진자 가져오기
-			const patients = data.response.body.items.item;
 
-			this.store = patients;
-
-			const temp = [];
-			for (var i = 1; i < patients.length; i++) {
-				temp.push(patients[i - 1].decideCnt - patients[i].decideCnt);
-				console.log(patients[i].decideCnt);
-			}
-			this.value = temp.reverse();
-			this.myChart.data.datasets.data = this.value;
+			// return temp.reverse();
 		},
+
 		fetchDate() {
 			var result = [];
 			var strTmp = this.store.reverse();
@@ -65,41 +54,53 @@ export default {
 			console.log(result);
 			return result;
 		},
+
 		dateSlice(string) {
 			return string.slice(0, 10);
 		},
-	},
+		async getWeek() {
+			var a = await this.fetchCovid(7);
+			this.chartConfig(a);
+		},
+		async getMonth() {
+			var a = await this.fetchCovid(30);
+			this.chartConfig(a);
+		},
 
-	async mounted() {
-		await this.fetchCovid();
-		console.log('Mount :' + this.value);
-		// int a = Math.random;
-		var ctx = document.getElementById('myChart');
-		var date = this.fetchDate();
-		this.myChart = new Chart(ctx, {
-			type: 'line',
-			data: {
-				labels: date,
-				datasets: [
-					{
-						label: '일별 확진자 수',
-						// data: [12000, 19000, 3000, 5000, 2000, 30000],
-						data: this.value,
+		chartConfig(dataSet) {
+			dataSet;
+			// await this.fetchCovid();
+			console.log('Mount :' + this.value);
+			// int a = Math.random;s
 
-						backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-						borderColor: ['rgba(255, 99, 132, 1)'],
-						borderWidth: 1,
-					},
-				],
-			},
-			options: {
-				scales: {
-					y: {
-						beginAtZero: true,
+			var ctx = document.getElementById('myChart');
+			var date = this.fetchDate();
+
+			this.myChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: date,
+					datasets: [
+						{
+							label: '일별 확진자 수',
+							// data: [12000, 19000, 3000, 5000, 2000, 30000],
+							data: this.value,
+
+							backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+							borderColor: ['rgba(255, 99, 132, 1)'],
+							borderWidth: 1,
+						},
+					],
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true,
+						},
 					},
 				},
-			},
-		});
+			});
+		},
 	},
 };
 </script>

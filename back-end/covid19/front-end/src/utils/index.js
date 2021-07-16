@@ -1,5 +1,8 @@
 import axios from 'axios';
-//auth
+
+/**
+ * 로그인/회원가입
+ */
 
 function loginUser(userData) {
 	const url = 'http://localhost:8888/user/login';
@@ -12,10 +15,10 @@ function signupUser(userData) {
 	const response = axios.post(url, userData);
 	return response;
 }
-function fetchUserList() {
-	const response = axios.get('http://localhost:8888/users');
-	return response;
-}
+
+/**
+ * 쿠키
+ */
 
 // cookie
 function saveAuthToCookie(value) {
@@ -44,21 +47,6 @@ function deleteCookie(value) {
 	document.cookie = `${value}=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
 }
 
-// 관리자 등록 API
-function registVaccine(formData) {
-	const response = axios.post('http://localhost:8888/items/new', formData);
-	return response;
-}
-
-function orderVaccine(orderData) {
-	const response = axios.post(
-		// `http://localhost:8888/order/?userId=${userId}&itemId=${orderId}&count=${count}`
-		'http://localhost:8888/order/',
-		orderData,
-	);
-	return response;
-}
-
 export {
 	saveAuthToCookie,
 	saveUserToCookie,
@@ -67,7 +55,4 @@ export {
 	deleteCookie,
 	loginUser,
 	signupUser,
-	registVaccine,
-	fetchUserList,
-	orderVaccine,
 };
