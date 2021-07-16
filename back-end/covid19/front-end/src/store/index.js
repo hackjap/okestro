@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
+import { getUserFromCookie } from '../utils/index';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
-		name: '',
+		name: getUserFromCookie(),
 
 		user: {},
 		order: {},
@@ -14,6 +14,9 @@ export default new Vuex.Store({
 	getters: {
 		isLogin(state) {
 			return state.name !== '';
+		},
+		isAdmin(state) {
+			return state.name == 'admin@naver.com';
 		},
 	},
 	mutations: {

@@ -6,10 +6,10 @@
 				:items="select.userList"
 				item-text="name"
 				item-value="id"
-				:rules="[v => !!v || 'Item is required']"
 				label="회원조회"
 				required
 			></v-select>
+			<!-- :rules="[v => !!v || 'Item is required']" -->
 			<v-select
 				v-model="vaccineId"
 				:items="select.vaccineList"

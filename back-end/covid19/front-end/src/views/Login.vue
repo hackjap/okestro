@@ -72,16 +72,17 @@ export default {
 			};
 			try {
 				const { data } = await loginUser(userData);
-				console.log(userData);
-				this.user = data.findUsers; // user 배열
-				console.log();
-				const userEmail = this.user[0].email;
+				this.user = data.data[0]; // user 배열
+				console.log(this.user);
+
+				const userEmail = this.user.email;
 
 				saveUserToCookie(userEmail);
 				this.$store.commit('setName', userEmail);
-				const val = this.user[0].email != '';
-				if (val) {
-					alert(`${this.user[0].email}님 환영합니다!`);
+
+				const validation = this.user.email != '';
+				if (validation) {
+					alert(`${this.user.email}님 환영합니다!`);
 					this.$router.push('/home');
 				}
 			} catch (error) {

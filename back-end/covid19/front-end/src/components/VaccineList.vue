@@ -23,12 +23,25 @@
 					<td>{{ item.orderName }}</td>
 					<td>{{ item.orderStatus }}</td>
 					<td>{{ `${item.orderDate.slice(0, 10)}` }}</td>
-					<v-btn @click="cancelOrder(item.orderId)" v-if="isAdmin" color="grey">
-						취소
-					</v-btn>
-					<v-btn @click="deleteOrder(item.orderId)" v-if="isAdmin" color="grey">
-						삭제
-					</v-btn>
+					<v-container>
+						<v-btn @click="cancelOrder(item.orderId)" color="grey">
+							취소
+						</v-btn>
+						<v-btn
+							@click="finishOrder(item.orderId)"
+							v-if="isAdmin"
+							color="grey"
+						>
+							완료
+						</v-btn>
+						<v-btn
+							@click="deleteOrder(item.orderId)"
+							v-if="isAdmin"
+							color="grey"
+						>
+							삭제
+						</v-btn>
+					</v-container>
 				</tr>
 			</tbody>
 		</template>
@@ -39,6 +52,7 @@ import {
 	fetchOrders,
 	cancelOrderVaccine,
 	deletelOrderVaccine,
+	completeOrderVaccine,
 } from '@/api/index';
 
 export default {
@@ -50,7 +64,7 @@ export default {
 	},
 	computed: {
 		isAdmin() {
-			return this.$store.state.name != 'admin@naver.com';
+			return this.$store.state.name == 'admin@naver.com';
 		},
 	},
 	async mounted() {
@@ -70,6 +84,14 @@ export default {
 		// 예약 삭제
 		async deleteOrder(orderId) {
 			await deletelOrderVaccine(orderId);
+			// 데이터 변경사항 적용
+			const { data } = await fetchOrders();
+			this.items = data;
+		},
+
+		// 접종 완료
+		async finishOrder(orderId) {
+			await completeOrderVaccine(orderId);
 			// 데이터 변경사항 적용
 			const { data } = await fetchOrders();
 			this.items = data;

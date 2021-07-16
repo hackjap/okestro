@@ -4,8 +4,9 @@
 			<div id="map" class="map" style="width:100%;height:600px;"></div>
 			<v-card class="mt-5"> </v-card>
 			<v-btn block @click="addMarker" color="primary">
-				우리 동네 백신조회</v-btn
+				백신예방접종 장소 조회</v-btn
 			>
+			<v-btn block @click="getLocation" color="indigo"> 내 위치 조회 </v-btn>
 		</v-card>
 	</v-container>
 </template>
@@ -26,6 +27,10 @@ export default {
 		},
 		map: {},
 		marker: {},
+		location: {
+			latitude: '',
+			longitude: '',
+		},
 	}),
 	async mounted() {
 		const response = await fetchVaccine();
@@ -39,10 +44,30 @@ export default {
 		}
 
 		window.kakao && window.kakao.maps
-			? this.initMap()
+			? this.initMap(37.715133, 126.734086)
 			: this.addKakaoMapScript();
 	},
 	methods: {
+		getLocation() {
+			navigator.geolocation.getCurrentPosition(this.showPosition);
+			this.initMap(this.location.latitude, this.location.longitude);
+
+			// 현재 위치 마커 생성
+			this.marker = new kakao.maps.Marker({
+				map: this.map, // 마커를 표시할 지도
+				// position: positions[i].latlng, // 마커를 표시할 위치
+				position: new kakao.maps.LatLng(
+					this.location.latitude,
+					this.location.longitude,
+				),
+			});
+		},
+		showPosition(position) {
+			this.location.latitude = position.coords.latitude;
+			this.location.longitude = position.coords.longitude;
+			console.log(this.location);
+		},
+
 		addMarker() {
 			// 마커 이미지의 이미지 주소입니다
 			var imageSrc =
@@ -92,12 +117,12 @@ export default {
 			document.head.appendChild(script);
 		},
 		// 카카오 맵 호출
-		initMap() {
+		initMap(lat, lon) {
 			var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 			var options = {
 				//지도를 생성할 때 필요한 기본 옵션
-				center: new kakao.maps.LatLng(37.715133, 126.734086), //지도의 중심좌표.
-				level: 10, //지도의 레벨(확대, 축소 정도)
+				center: new kakao.maps.LatLng(lat, lon), //지도의 중심좌표.
+				level: 7, //지도의 레벨(확대, 축소 정도)
 			};
 
 			var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴

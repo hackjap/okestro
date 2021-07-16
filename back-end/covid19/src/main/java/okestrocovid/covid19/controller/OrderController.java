@@ -44,21 +44,20 @@ public class OrderController {
 //        return "order/orderForm";
 //    }
 
-    // 주문
+    // 예약
     @PostMapping(value = "")
     public String order(@RequestBody OrderForm form){
 
 //        Order order = new Order();
 
         orderService.order(form.getUserId(),form.getItemId(),form.getCount());
-        return "주문완료";
+        return "예약성공";
 
     }
 
     /**
-     * 주문 목록 검색, 취소
+     * 예약 목록 검색, 취소
      */
-
 
     @GetMapping("list")
     public  List<SimpleOrderDto> orders() {
@@ -72,7 +71,7 @@ public class OrderController {
     }
 
     /**
-     * 주문 취소
+     * 예약 취소
      */
 
     @PostMapping("{orderId}/cancel")
@@ -84,7 +83,7 @@ public class OrderController {
     }
 
     /**
-     * 주문 삭제
+     * 예약 삭제
      */
 
     @DeleteMapping("{orderId}/delete")
@@ -93,6 +92,18 @@ public class OrderController {
         orderService.deleteOrder(orderId);
 
         return "예약삭제 완료";
+    }
+
+    /**
+     * 접종 완료
+     */
+
+    @PutMapping("{orderId}/complete")
+    public String CompleteOrder(@PathVariable("orderId")Long orderId){
+
+        orderService.completeOrder(orderId);
+
+        return "예방접종완료";
     }
 
 

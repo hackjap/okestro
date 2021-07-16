@@ -37,14 +37,28 @@
 				<v-list-item-content>
 					<v-list-item-title>{{ item.title }}</v-list-item-title>
 				</v-list-item-content>
+				<!-- <template v-if="isAuth && ">
+				</template> -->
 			</v-list-item>
 		</v-list>
 	</v-navigation-drawer>
 </template>
 
 <script>
+import store from '../../store/index';
 export default {
 	name: 'DefaultDrawer',
+	methods: {
+		test() {
+			return true;
+		},
+	},
+
+	computed: {
+		isAuth() {
+			return !store.getters.isAdmin;
+		},
+	},
 	data: () => ({
 		gradient: 'rgba(0,0,0,.7), rgba(0,0,0,.7)',
 		items: [
@@ -64,8 +78,10 @@ export default {
 				icon: 'mdi-chart-line',
 				to: '/chart',
 			},
-			{ title: '코로나 맵', icon: 'mdi-map', to: '/map' },
+			{ title: '백신예방접종센터', icon: 'mdi-map', to: '/map' },
+
 			{ title: '백신접종신청', icon: 'mdi-map', to: '/vaccine' },
+
 			{
 				title: '관리자페이지',
 				icon: 'mdi-emoticon-devil-outline',

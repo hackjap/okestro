@@ -68,6 +68,12 @@ public class OrderService {
 //        order.cancel();
     }
 
+    // ** 예방 접종 완료 ** /
+    @Transactional
+    public void completeOrder(Long orderId) {
+        Order order = orderRepository.findOne(orderId);
+        order.complete();
+    }
 
 
     public List<Order>findOrders(){

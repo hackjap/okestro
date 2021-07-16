@@ -13,7 +13,7 @@ function fetchPatient(date) {
 // 백신접종센터
 function fetchVaccine() {
 	const url =
-		'https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=100&serviceKey=%2F6YC05LX402Mq1%2Beg8O2m74njrcI2N0h7Km4BNbneOT0MOJlEhWA7Zj7y5c0NrBO2PYPPHWjGBfMFEk6731aug%3D%3D';
+		'https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=200&serviceKey=%2F6YC05LX402Mq1%2Beg8O2m74njrcI2N0h7Km4BNbneOT0MOJlEhWA7Zj7y5c0NrBO2PYPPHWjGBfMFEk6731aug%3D%3D';
 	const response = axios.get(url);
 	return response;
 }
@@ -66,6 +66,14 @@ function cancelOrderVaccine(orderId) {
 	return response;
 }
 
+// 사용자 백신 접종 완료
+function completeOrderVaccine(orderId) {
+	const response = axios.put(
+		`http://localhost:8888/orders/${orderId}/complete`,
+	);
+	return response;
+}
+
 // 사용자 백신 예약 삭제
 function deletelOrderVaccine(orderId) {
 	const response = axios.delete(
@@ -83,4 +91,5 @@ export {
 	fetchUserList,
 	cancelOrderVaccine,
 	deletelOrderVaccine,
+	completeOrderVaccine,
 };

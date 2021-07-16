@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Chart from '@/views/Chart.vue';
 import Login from '@/views/Login.vue';
 import SignUp from '@/views/SignUp.vue';
-import Home from '../views/demo/Home.vue';
+// import Home from '../views/demo/Home.vue';
 import Map from '../views/Map.vue';
 import Vaccine from '../views/Vaccine.vue';
 import VaccineForm from '@/components/VaccineForm';
@@ -14,18 +14,18 @@ import AdminRegister from '../views/AdminRegister';
 // import VaccineRegistList from '../components/VaccineRegistList.vue';
 import VaccineRegistList from '../components/VaccineRegistList.vue';
 // import Chart from '@/views/Chart';
-// import store from '@/store/index';
+import store from '@/store/index';
 Vue.use(VueRouter);
 
 const router = new VueRouter({
 	mode: 'history',
 	routes: [
-		{
-			path: '/',
-			name: 'Home',
-			component: Home,
-			meta: { auth: true },
-		},
+		// {
+		// 	path: '/',
+		// 	name: 'Home',
+		// 	component: Home,
+		// 	meta: { auth: true },
+		// },
 		{
 			path: '/signup',
 			name: '회원가입',
@@ -43,7 +43,7 @@ const router = new VueRouter({
 			meta: { auth: true },
 		},
 		{
-			path: '/map',
+			path: '/',
 			name: '코로나 맵',
 			component: Map,
 			meta: { auth: true },
@@ -87,14 +87,18 @@ const router = new VueRouter({
 	],
 });
 
-// // 네비게이션 가드
-// router.beforeEach((to, from, next) => {
-// 	if (to.meta.auth && !store.getters.isLogin) {
-// 		alert('로그인하고 써라 ㅋㅋ');
-// 		next('/login');
-// 		return; //
-// 	}
-// 	next();
-// });
+// 네비게이션 가드
+router.beforeEach((to, from, next) => {
+	if (to.meta.auth && !store.getters.isLogin) {
+		alert('로그인인 후 이용해주세요.');
+		next('/login');
+		return;
+	} else if (to.meta.admin && !store.getters.isAdmin) {
+		alert('관리자 페이지입니다..');
+		next('/login');
+		return; //
+	}
+	next();
+});
 
 export default router;

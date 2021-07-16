@@ -24,12 +24,13 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/user/login")
-    public LoginUserResponse login(@RequestBody LoginUserRequest request) {
+    public Result  login(@RequestBody LoginUserRequest request) {
 
-        List<User> login = userService.login(request);
+        List<LoginUserRequest> result = userService.login(request);
 
-        return new LoginUserResponse(login);
+        return new Result(result);
     }
+
 
     @PostMapping("/user/signup")
     public SignupUserResponse signup(@RequestBody SignupUserRequest request) {
@@ -50,7 +51,7 @@ public class UserController {
         // 컬렉션에 한번 감싸서 향후 필요한 필드를 추가할 수 있음
         List<User> findMembers = userService.findUsers();
         List<UserListDto> collect = findMembers.stream()
-                .map(m -> new UserListDto(m.getId(),m.getName()))
+                .map(m -> new UserListDto(m.getId(),m.getName(),m.getEmail()))
                 .collect(Collectors.toList());
         return new Result(collect);
     }

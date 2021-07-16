@@ -6,10 +6,12 @@ import okestrocovid.covid19.domain.User;
 
 import okestrocovid.covid19.dto.LoginUserRequest;
 import okestrocovid.covid19.repository.UserRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +19,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-
+    private final JpaRepository jpaRepository;
 
     /**
      * 회원 가입
@@ -39,8 +41,16 @@ public class UserService {
     /**
      * 로그인
      */
-    public List<User> login(LoginUserRequest loginUserRequest) {
+    public  List<LoginUserRequest> login(LoginUserRequest loginUserRequest) {
         List<User> findUsers = userRepository.findByEmail(loginUserRequest.getEmail());
+
+
+        List<LoginUserRequest> result = findUsers.stream()
+                .map(u -> new LoginUserRequest(u))
+                .collect(Collectors.toList());
+
+        return result;
+
       /*  for(int i=0; i<findUsers.size();i++) {
             boolean val = findUsers.get(i).getEmail().equals(loginUserRequest.getEmail())
                     && findUsers.get(i).getPassword().equals(loginUserRequest.getPassword());
@@ -52,10 +62,6 @@ public class UserService {
             }
         }*/
 //        loginUserRequest.get
-
-
-
-        return findUsers;
     }
 
 
