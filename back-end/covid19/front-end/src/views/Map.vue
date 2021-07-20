@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { fetchVaccine } from '@/api/index';
+import { fetchVaccine } from '@/api/covid';
 
 export default {
 	data: () => ({

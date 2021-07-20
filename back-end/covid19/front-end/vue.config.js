@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = {
 	devServer: {
 		port: 1998,
+		overlay: false,
 	},
 
 	// 빌드용

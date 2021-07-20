@@ -1,18 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Chart from '@/views/Chart.vue';
-import Login from '@/views/Login.vue';
-import SignUp from '@/views/SignUp.vue';
-// import Home from '../views/demo/Home.vue';
-import Map from '../views/Map.vue';
-import Vaccine from '../views/Vaccine.vue';
-import VaccineForm from '@/components/VaccineForm';
-import VaccineList from '@/components/VaccineList';
-import VaccineRegistForm from '../components/VaccineRegistForm.vue';
 
-import AdminRegister from '../views/AdminRegister';
-// import VaccineRegistList from '../components/VaccineRegistList.vue';
-import VaccineRegistList from '../components/VaccineRegistList.vue';
 // import Chart from '@/views/Chart';
 import store from '@/store/index';
 Vue.use(VueRouter);
@@ -20,68 +8,76 @@ Vue.use(VueRouter);
 const router = new VueRouter({
 	mode: 'history',
 	routes: [
-		// {
-		// 	path: '/',
-		// 	name: 'Home',
-		// 	component: Home,
-		// 	meta: { auth: true },
-		// },
+		{
+			path: '/',
+			name: 'Home',
+			component: () => import('@/views/VueChart'),
+
+			meta: { auth: true },
+		},
 		{
 			path: '/signup',
 			name: '회원가입',
-			component: SignUp,
+			// component: SignUp,
+			component: () => import('@/views/SignUp'),
 		},
 		{
 			path: '/login',
 			name: '로그인',
-			component: Login,
+			component: () => import('@/views/Login.vue'),
 		},
 		{
 			path: '/chart',
 			name: '코로나 차트',
-			component: Chart,
+			component: () => import('@/views/Chart'),
+
 			meta: { auth: true },
 		},
 		{
-			path: '/',
+			path: '/map',
 			name: '코로나 맵',
-			component: Map,
+			component: () => import('@/views/Map'),
+
 			meta: { auth: true },
 		},
 		{
 			path: '/vaccine',
 			name: '백신',
-			component: Vaccine,
+			component: () => import('@/views/Vaccine'),
+
 			meta: { auth: true },
 		},
 		{
 			path: '/vaccineform',
 			name: '백신폼',
-			component: VaccineForm,
+			component: () => import('@/components/VaccineForm'),
+
 			meta: { auth: true },
 		},
 		{
 			path: '/vaccinelist',
 			name: '백신리스트',
-			component: VaccineList,
+			component: () => import('@/components/VaccineList'),
+
 			meta: { auth: true },
 		},
 		{
 			path: '/vaccineregistform',
 			name: '백신등록',
-			component: VaccineRegistForm,
+			component: () => import('@/components/VaccineRegistForm'),
+
 			meta: { auth: true },
 		},
 		{
 			path: '/vaccineregistlist',
 			name: '등록리스트',
-			component: VaccineRegistList,
+			component: () => import('@/components/VaccineRegistList'),
 			meta: { auth: true },
 		},
 		{
 			path: '/adminregister',
 			name: '관리자페이지',
-			component: AdminRegister,
+			component: () => import('@/views/AdminRegister'),
 			meta: { admin: true },
 		},
 	],

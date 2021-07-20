@@ -84,9 +84,9 @@ public class Order {
     // 주문 취소
     public void cancel() {
         if (cure.getStatus() == CureStatus.예방접종완료) {
-            throw new IllegalStateException("이미 접종하신 백신은 취소가 불가능합니다");
+            throw new IllegalStateException("이미 접종하신 백신은 대기가 불가능합니다");
         }
-        this.setStatus(CureStatus.예방접종취소);
+        this.setStatus(CureStatus.예방접종대기);
         for (OrderItem orderItem : orderItems) {
             orderItem.cancel();
         }
@@ -94,9 +94,9 @@ public class Order {
 
 
     public void complete() {
-        if(cure.getStatus() == CureStatus.예방접종취소){
-            throw new IllegalStateException("이미 접종하신 백신이 취소되었습니다.");
-        }
+//        if(cure.getStatus() == CureStatus.예방접종대기){
+//            throw new IllegalStateException("이미 접종하신 백신이 취소되었습니다.");
+//        }
         this.setStatus(CureStatus.예방접종완료);
         for (OrderItem orderItem : orderItems) {
             orderItem.cancel();

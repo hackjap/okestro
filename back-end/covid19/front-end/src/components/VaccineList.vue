@@ -1,51 +1,53 @@
 <template>
-	<v-simple-table>
-		<template v-slot:default>
-			<thead>
-				<tr>
-					<th class="text-left">
-						회원명
-					</th>
-					<th class="text-left">
-						백신종류
-					</th>
-					<th class="text-left">
-						상태
-					</th>
-					<th class="text-left">
-						날짜
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr v-for="item in items" :key="item.name">
-					<td>{{ item.userName }}</td>
-					<td>{{ item.orderName }}</td>
-					<td>{{ item.orderStatus }}</td>
-					<td>{{ `${item.orderDate.slice(0, 10)}` }}</td>
-					<v-container>
-						<v-btn @click="cancelOrder(item.orderId)" color="grey">
-							취소
-						</v-btn>
-						<v-btn
-							@click="finishOrder(item.orderId)"
-							v-if="isAdmin"
-							color="grey"
-						>
-							완료
-						</v-btn>
-						<v-btn
-							@click="deleteOrder(item.orderId)"
-							v-if="isAdmin"
-							color="grey"
-						>
-							삭제
-						</v-btn>
-					</v-container>
-				</tr>
-			</tbody>
-		</template>
-	</v-simple-table>
+	<div>
+		<v-simple-table>
+			<template v-slot:default>
+				<thead>
+					<tr>
+						<th class="text-left">
+							회원명
+						</th>
+						<th class="text-left">
+							백신종류
+						</th>
+						<th class="text-left">
+							상태
+						</th>
+						<th class="text-left">
+							날짜
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="item in items" :key="item.name">
+						<td>{{ item.userName }}</td>
+						<td>{{ item.orderName }}</td>
+						<td>{{ item.orderStatus }}</td>
+						<td>{{ `${item.orderDate.slice(0, 10)}` }}</td>
+						<v-container>
+							<v-btn
+								@click="deleteOrder(item.orderId)"
+								v-if="isAdmin"
+								color="primary"
+							>
+								취소
+							</v-btn>
+							<v-btn @click="cancelOrder(item.orderId)" color="primary">
+								대기
+							</v-btn>
+							<v-btn
+								@click="finishOrder(item.orderId)"
+								v-if="isAdmin"
+								color="primary"
+							>
+								완료
+							</v-btn>
+						</v-container>
+					</tr>
+				</tbody>
+			</template>
+		</v-simple-table>
+	</div>
 </template>
 <script>
 import {
@@ -53,7 +55,7 @@ import {
 	cancelOrderVaccine,
 	deletelOrderVaccine,
 	completeOrderVaccine,
-} from '@/api/index';
+} from '@/api/covid';
 
 export default {
 	data() {
@@ -83,10 +85,15 @@ export default {
 		},
 		// 예약 삭제
 		async deleteOrder(orderId) {
-			await deletelOrderVaccine(orderId);
-			// 데이터 변경사항 적용
-			const { data } = await fetchOrders();
-			this.items = data;
+			var con_test = confirm('정말로 취소 하시겠습니까?');
+			if (con_test == true) {
+				await deletelOrderVaccine(orderId);
+				// 데이터 변경사항 적용
+				const { data } = await fetchOrders();
+				this.items = data;
+			} else if (con_test == false) {
+				console.log('취소');
+			}
 		},
 
 		// 접종 완료

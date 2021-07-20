@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { signupUser } from '@/utils/index';
+import { signupUser } from '@/api/auth';
 export default {
 	data: () => ({
 		value: '',

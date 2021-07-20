@@ -26,26 +26,29 @@ public class TestApiController {
         this.testApiService = testApiService;
     }
 
+    // 매개변수에 따른 이전 날짜를 가져오는 API
+//    @CrossOrigin("*")
+//    @GetMapping("covid/day")
+//    public String fetchWeek(@RequestParam("date") int date ) throws IOException {
+////        Model model = null;
+//        String xmlResponse = testApiService.getFirstTodosTest(date);
+//
+//        JSONObject jsonpObject = XML.toJSONObject(xmlResponse);
+//
+//        String response = jsonpObject.toString();
+//
+////        String a =" hi";
+////        model.addAttribute("response", response);
+//        log.info(xmlResponse);
+//        return response;
+//    }
+
+    //
     @CrossOrigin("*")
-    @GetMapping("covid/week")
-    public String fetcgWeek(@RequestParam("date") int date ) throws IOException {
+    @GetMapping("covid/day")
+    public String fetchMonth(@RequestParam("date") int date,@RequestParam("cycle")int cycle ) throws IOException {
 //        Model model = null;
-        String xmlResponse = testApiService.getFirstTodosTest(date);
-
-        JSONObject jsonpObject = XML.toJSONObject(xmlResponse);
-
-        String response = jsonpObject.toString();
-
-//        String a =" hi";
-//        model.addAttribute("response", response);
-        log.info(xmlResponse);
-        return response;
-    }
-    @CrossOrigin("*")
-    @GetMapping("covid/month")
-    public String fetchMonth(@RequestParam String Date ) throws IOException {
-//        Model model = null;
-        String xmlResponse = testApiService.getFirstTodosTest(-10);
+        String xmlResponse = testApiService.getSecondTodosTest(date,cycle);
 
         JSONObject jsonpObject = XML.toJSONObject(xmlResponse);
 

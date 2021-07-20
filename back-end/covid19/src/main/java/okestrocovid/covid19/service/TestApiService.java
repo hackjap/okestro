@@ -27,13 +27,23 @@ public class TestApiService {
 //                .build();
 //    }
 
-    public String getFirstTodosTest(int date) throws IOException {
+//    public String getFirstTodosTest(int date) throws IOException {
+////        String response =
+////                this.webClient.get()
+////                .retrieve().bodyToMono(String.class)
+////                .block();
+//
+//        return covid.fetchData(date);
+//
+//    }
+
+    public String getSecondTodosTest(int date,int cycle) throws IOException {
 //        String response =
 //                this.webClient.get()
 //                .retrieve().bodyToMono(String.class)
 //                .block();
 
-        return covid.fetchData(date);
+        return covid.fetchDataV2(date,cycle);
 
     }
 

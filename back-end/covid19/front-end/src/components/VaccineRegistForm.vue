@@ -1,40 +1,43 @@
 <template>
-	<v-card class="pa-3">
-		<v-form ref="form" v-model="valid" lazy-validation>
-			<v-text-field
-				v-model="formData.vaccine"
-				label="백신명"
-				required
-			></v-text-field>
-			<v-text-field
-				v-model="formData.price"
-				label="가격"
-				required
-			></v-text-field>
-			<v-text-field
-				v-model="formData.quantity"
-				label="수량"
-				required
-			></v-text-field>
-			<v-text-field
-				v-model="formData.country"
-				label="원산지"
-				required
-			></v-text-field>
-			<v-btn
-				:disabled="!valid"
-				color="success"
-				class="mr-4"
-				@click="submitForm"
-			>
-				신청하기
-			</v-btn>
-		</v-form>
-	</v-card>
+	<div>
+		<p class="text-center white--text grey darken-1 mt-4">백신 정보 등록</p>
+		<v-card class="pa-3">
+			<v-form ref="form" v-model="valid" lazy-validation>
+				<v-text-field
+					v-model="formData.vaccine"
+					label="백신명"
+					required
+				></v-text-field>
+				<v-text-field
+					v-model="formData.price"
+					label="가격"
+					required
+				></v-text-field>
+				<v-text-field
+					v-model="formData.quantity"
+					label="수량"
+					required
+				></v-text-field>
+				<v-text-field
+					v-model="formData.country"
+					label="원산지"
+					required
+				></v-text-field>
+				<v-btn
+					:disabled="!valid"
+					color="success"
+					class="mr-4"
+					@click="submitForm"
+				>
+					신청하기
+				</v-btn>
+			</v-form>
+		</v-card>
+	</div>
 </template>
 
 <script>
-import { registVaccine } from '@/api/index';
+import { registVaccine } from '@/api/covid';
 export default {
 	data: () => ({
 		formData: {

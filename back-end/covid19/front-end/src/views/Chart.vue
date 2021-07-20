@@ -1,9 +1,9 @@
 <template>
-	<v-container class="mt-5">
-		<v-card class="" color="grey lighten-4">
+	<div>
+		<v-card color="grey lighten-4">
 			<v-card-title>일별 신규 확진자 수</v-card-title>
 			<!-- 차트 -->
-			<div style="width:800px">
+			<div style="width:500px">
 				<canvas id="myChart"></canvas>
 			</div>
 		</v-card>
@@ -11,21 +11,25 @@
 		<v-form ref="form">
 			<span>
 				<v-text-field v-model="date" label="날짜" required></v-text-field>
-				<v-btn class="mt-5" @click="getWeek"> 일주일 </v-btn>
-				<v-btn class="mt-5" @click="getMonth"> 한달 </v-btn>
+				<v-btn class="mt-5" @click="chartConfig(7)"> 일주일 </v-btn>
+				<v-btn class="mt-5" @click="chartConfig(30)"> 한달 </v-btn>
 			</span>
 		</v-form>
-	</v-container>
+	</div>
 </template>
 <script>
-import Chart from 'chart.js/auto';
-import { fetchPatient } from '../api/index';
+import Chart from 'chart.js';
+import { fetchPatient } from '@/api/covid';
 export default {
 	data: () => ({
 		store: [],
 		value: [],
 		myChart: {},
+		// ctx: {},
 	}),
+	mounted() {
+		this.ctx = document.getElementById('myChart');
+	},
 
 	methods: {
 		async fetchCovid(date) {
@@ -59,24 +63,19 @@ export default {
 			return string.slice(0, 10);
 		},
 		async getWeek() {
-			var a = await this.fetchCovid(7);
-			this.chartConfig(a);
+			var result = await this.fetchCovid(7);
+			return result;
 		},
 		async getMonth() {
-			var a = await this.fetchCovid(30);
-			this.chartConfig(a);
+			var result = await this.fetchCovid(30);
+			return result;
 		},
 
-		chartConfig(dataSet) {
-			dataSet;
-			// await this.fetchCovid();
-			console.log('Mount :' + this.value);
-			// int a = Math.random;s
-
+		async chartConfig(day) {
 			var ctx = document.getElementById('myChart');
 			var date = this.fetchDate();
 
-			this.myChart = new Chart(ctx, {
+			const myChart = new Chart(ctx, {
 				type: 'line',
 				data: {
 					labels: date,
@@ -100,7 +99,29 @@ export default {
 					},
 				},
 			});
-		},
+			myChart.data.datasets[0].data = this.value;
+			myChart.update();
+
+			if (day == 7) {
+				await this.getWeek();
+			} else if (day == 30) {
+				await this.getMonth();
+			} else {
+				await this.getMonth();
+			}
+			// const dataSet = result;
+			// await this.fetchCovid();
+			console.log('Mount :' + this.value);
+
+			// int a = Math.random;s
+
+			// this.ctx == null;
+			// this.ctx = document.getElementById('myChart');
+			// this.myChart = null;
+
+			// myChart.destroy();
+			// console.log(myChart);
+		}, // end of chartConfig
 	},
 };
 </script>

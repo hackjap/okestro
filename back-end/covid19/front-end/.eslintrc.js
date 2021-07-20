@@ -12,15 +12,14 @@ module.exports = {
   // 코드 정리 플러그인 추가
   plugins: ['prettier'],
   // 사용자 편의 규칙 추가
+
+
   rules: {
-        // 'vuetify/no-legacy-grid':'error',
     'prettier/prettier': [
-        
       'error',
       // 아래 규칙들은 개인 선호에 따라 prettier 문법 적용
       // https://prettier.io/docs/en/options.html
       {
-          
         singleQuote: true,
         semi: true,
         useTabs: true,
@@ -29,9 +28,19 @@ module.exports = {
         printWidth: 80,
         bracketSpacing: true,
         arrowParens: 'avoid',
+		  endOfLine: 'auto',
       },
     ],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-  
   },
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true
+	},
+parserOptions: {
+  parser: 'babel-eslint',
+  sourceType: 'module',
+  allowImportExportEverywhere: true
+}
 };

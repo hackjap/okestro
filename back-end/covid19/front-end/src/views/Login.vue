@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { loginUser } from '@/utils/index';
+import { loginUser } from '@/api/auth';
 import { saveUserToCookie } from '@/utils/index';
 export default {
 	data: () => ({

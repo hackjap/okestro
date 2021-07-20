@@ -1,19 +1,30 @@
 <template>
 	<v-card>
-		<v-tabs fixed-tabs border-color="indigo" dark>
-			<v-tab class=" display-1 primary" @click="firstTab">
-				백신등록
+		<!-- <template>
+			<v-tabs>
+				<v-tab @click="firstTab">잔여백신예약</v-tab>
+				<v-tab @click="secondTab">백신예약조회</v-tab>
+			</v-tabs>
+		</template> -->
+		<v-tabs fixed-tabs>
+			<v-tab @click="firstTab">
+				관리자 정보 등록
 			</v-tab>
-			<v-tab class="display-1 primary" @click="secondTab">
-				백신목록
+			<v-tab @click="secondTab">
+				관리자 정보 수정
 			</v-tab>
 		</v-tabs>
-		<template v-if="this.flag">
-			<VaccineRegistForm></VaccineRegistForm>
-		</template>
-		<template v-else>
-			<VaccineRegistList></VaccineRegistList>
-		</template>
+		<div class="ma-5 pa-3" none>
+			<template v-if="this.flag">
+				<VaccineRegistForm></VaccineRegistForm>
+			</template>
+			<template v-else>
+				<p class="text-center white--text grey darken-1">
+					사용자 등록 정보
+				</p>
+				<VaccineRegistList></VaccineRegistList>
+			</template>
+		</div>
 	</v-card>
 </template>
 

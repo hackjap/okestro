@@ -1,21 +1,3 @@
-import axios from 'axios';
-
-/**
- * 로그인/회원가입
- */
-
-function loginUser(userData) {
-	const url = 'http://localhost:8888/user/login';
-	const response = axios.post(url, userData);
-	return response;
-}
-
-function signupUser(userData) {
-	const url = 'http://localhost:8888/user/signup';
-	const response = axios.post(url, userData);
-	return response;
-}
-
 /**
  * 쿠키
  */
@@ -53,6 +35,4 @@ export {
 	getAuthFromCookie,
 	getUserFromCookie,
 	deleteCookie,
-	loginUser,
-	signupUser,
 };

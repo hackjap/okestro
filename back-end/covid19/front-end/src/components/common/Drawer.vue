@@ -76,7 +76,7 @@ export default {
 			{
 				title: '코로나 확진자',
 				icon: 'mdi-chart-line',
-				to: '/chart',
+				to: '/',
 			},
 			{ title: '백신예방접종센터', icon: 'mdi-map', to: '/map' },
 

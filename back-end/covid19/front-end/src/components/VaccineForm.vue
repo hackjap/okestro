@@ -1,6 +1,6 @@
 <template>
-	<v-card class="pa-3">
-		<v-form ref="form" v-model="valid" lazy-validation>
+	<v-content class="pa-3 ">
+		<v-form ref="form" v-model="valid" lazy-validation class="mr-10">
 			<v-select
 				v-model="userId"
 				:items="select.userList"
@@ -31,11 +31,11 @@
 				신청하기
 			</v-btn>
 		</v-form>
-	</v-card>
+	</v-content>
 </template>
 
 <script>
-import { fetchRegistedVaccine, fetchUserList, orderVaccine } from '@/api/index';
+import { fetchRegistedVaccine, fetchUserList, orderVaccine } from '@/api/covid';
 
 export default {
 	async mounted() {
