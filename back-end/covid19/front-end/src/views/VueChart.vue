@@ -18,8 +18,14 @@
 				코로나19 국내 발생 현황
 			</p>
 
-			<SimpleDataTable class="mt-10"></SimpleDataTable>
-			<DataTable class="mt-10"></DataTable>
+			<transition name="page">
+				<SimpleDataTable
+					class="mt-10"
+					:day="this.dayCycle"
+					:listnum="this.listNum"
+				></SimpleDataTable>
+			</transition>
+			<!-- <DataTable class="mt-10" none></DataTable> -->
 		</div>
 
 		<!-- <v-text-field label="몇일전?" center v-model="inputDay">
@@ -38,7 +44,7 @@
 import LineChart from '@/mixins/LineChart';
 import DateFilter from '@/components/DateFilter';
 import CycleButton from '@/components/CycleButton.vue';
-import DataTable from '@/components/DataTable.vue';
+// import DataTable from '@/components/DataTable.vue';
 import SimpleDataTable from '@/components/SimpleDataTable.vue';
 import { fetchPatient } from '../api/covid';
 import { Line } from 'vue-chartjs';
@@ -48,7 +54,7 @@ export default {
 		LineChart,
 		DateFilter,
 		CycleButton,
-		DataTable,
+		// DataTable,
 		SimpleDataTable,
 	},
 	data() {
@@ -79,7 +85,7 @@ export default {
 			dayCycle: 0,
 		};
 	},
-	mounted() {
+	beforeMount() {
 		this.fillData(7, 0);
 	},
 	methods: {
@@ -141,6 +147,8 @@ export default {
 			} else {
 				this.listNum += size;
 				this.fillData(size, this.listNum);
+				// 데이터 테이블에도 보내기
+				this.listFlag = false;
 			}
 		},
 		appendDay(size) {
@@ -148,6 +156,7 @@ export default {
 			else {
 				this.listNum -= size;
 				this.fillData(size, this.listNum);
+				this.listFlag = true;
 			}
 		},
 	},
@@ -169,5 +178,14 @@ export default {
 }
 .cycle-button {
 	width: 350px;
+}
+
+/* 라우터 트랜지션 */
+.page-enter-active,
+.page-leave-active {
+	transition: opacity 0.5s;
+}
+.page-enter, .page-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	opacity: 0;
 }
 </style>

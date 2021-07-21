@@ -3,19 +3,19 @@
 		<template v-slot:default>
 			<thead>
 				<tr class="table-header green lighten-5">
-					<th class="text-left black--text ">
+					<th class="text-center black--text ">
 						날짜
 					</th>
-					<th class="text-left black--text">
+					<th class="text-center black--text">
 						확진환자
 					</th>
-					<th class="text-left black--text">
+					<th class="text-center black--text">
 						격리해제
 					</th>
-					<th class="text-left black--text">
+					<th class="text-center black--text">
 						치료중
 					</th>
-					<th class="text-left black--text">
+					<th class="text-center black--text">
 						사망
 					</th>
 				</tr>
@@ -27,21 +27,23 @@
 					class="font-weight-medium "
 				>
 					<template v-if="i !== value.length - 1">
-						<td class="">{{ item.stateDt }}</td>
+						<td class="">{{ item.stateDt - 1 }}</td>
 						<td class="">
-							{{ item.decideCnt }}
-							<span class="red--text ">{{ '▲' + patients[i] }} </span>
+							{{ item.decideCnt.toLocaleString() + '명' }}
+							<span class="red--text ">
+								{{ '▲' + patients[i] }}
+							</span>
 						</td>
 						<td>
-							{{ item.clearCnt }}
+							{{ item.clearCnt.toLocaleString() + '명' }}
 							<span class="indigo--text">{{ '▲' + clear[i] }} </span>
 						</td>
 						<td>
-							{{ item.careCnt }}
+							{{ item.careCnt.toLocaleString() + '명' }}
 							<span class="green--text">{{ '▲' + care[i] }} </span>
 						</td>
 						<td>
-							{{ item.deathCnt }}
+							{{ item.deathCnt.toLocaleString() + '명' }}
 							<span class="grey--text">{{ '▲' + death[i] }} </span>
 						</td>
 					</template>
@@ -55,7 +57,37 @@ import { fetchPatient } from '../api/covid';
 
 export default {
 	async created() {
-		await this.fetchData(7, 0);
+		// this.cycle = this.day;
+		// this.cycle = this.day;
+		console.log(this.day);
+		await this.fetchData(this.day, 0);
+	},
+	// async beforeUpdate() {
+	// 	console.log(this.day);
+	// 	await this.fetchData(this.cycle, 0);
+	// },
+
+	data() {
+		return {
+			covid: [],
+			value: null,
+			patients: [], // 확진자 수
+			clear: [], // 격리해제 수
+			care: [], // 치료수
+			death: [], // 사망자 수
+			table: [],
+			dayCycle: 0,
+			listNum: 0, // 차트에 보여지는 리스트 목록
+		};
+	},
+	props: ['day', 'listnum'],
+	watch: {
+		day: async function() {
+			await this.fetchData(this.day, 0);
+		},
+		listnum: async function() {
+			await this.fetchData(this.day, this.listnum);
+		},
 	},
 	methods: {
 		async fetchData(day, cycle) {
@@ -80,18 +112,49 @@ export default {
 
 			console.log(this.patients);
 		},
-	},
+		prependDay(size) {
+			if (this.listNum < 0) {
+				alert('마지막 리스트입니다.');
+			} else {
+				this.listNum += size;
+				this.fetchData(size, this.listNum);
+			}
+		},
+		appendDay(size) {
+			if (this.listNum <= 0) alert('마지막 리스트입니다.');
+			else {
+				this.listNum -= size;
+				this.fetchData(size, this.listNum);
+			}
+		},
 
-	data() {
-		return {
-			covid: [],
-			value: null,
-			patients: [], // 확진자 수
-			clear: [], // 격리해제 수
-			care: [], // 치료수
-			death: [], // 사망자 수
-			table: [],
-		};
+		dateFormat(date) {
+			let month = date.getMonth() + 1;
+			let day = date.getDate();
+			let hour = date.getHours();
+			let minute = date.getMinutes();
+			let second = date.getSeconds();
+
+			month = month >= 10 ? month : '0' + month;
+			day = day >= 10 ? day : '0' + day;
+			hour = hour >= 10 ? hour : '0' + hour;
+			minute = minute >= 10 ? minute : '0' + minute;
+			second = second >= 10 ? second : '0' + second;
+
+			return (
+				date.getFullYear() +
+				'-' +
+				month +
+				'-' +
+				day +
+				' ' +
+				hour +
+				':' +
+				minute +
+				':' +
+				second
+			);
+		},
 	},
 };
 </script>
