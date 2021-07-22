@@ -83,7 +83,7 @@ export default {
 				const validation = this.user.email != '';
 				if (validation) {
 					alert(`${this.user.email}님 환영합니다!`);
-					this.$router.push('/home');
+					this.$router.push('/');
 				}
 			} catch (error) {
 				alert(`아이디 비밀번호를 확인하세요`);

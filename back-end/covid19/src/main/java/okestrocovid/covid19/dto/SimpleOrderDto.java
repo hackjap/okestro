@@ -15,6 +15,7 @@ public class SimpleOrderDto {
     private String orderName;
     private LocalDateTime orderDate;
     private CureStatus orderStatus;
+    private int orderCount;
 
 
     public SimpleOrderDto(Order order){
@@ -23,6 +24,7 @@ public class SimpleOrderDto {
         orderName = order.getOrderItems().get(0).getItem().getName();
         orderDate = order.getOrderDate();
         orderStatus = order.getStatus();
+        orderCount = order.getOrderItems().get(0).getCount();
 
     }
 }

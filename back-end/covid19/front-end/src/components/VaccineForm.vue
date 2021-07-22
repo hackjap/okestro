@@ -1,6 +1,10 @@
 <template>
 	<v-content class="pa-3 ">
-		<v-form ref="form" v-model="valid" lazy-validation class="mr-10">
+		<v-card class="grey lighten-4 pa-5">
+			<p class="text-center indigo--text ">잔여 백신 현황</p>
+			<VaccineRegistList class="pa-3"></VaccineRegistList>
+		</v-card>
+		<v-form ref="form" v-model="valid" lazy-validation class="mt-5">
 			<v-select
 				v-model="userId"
 				:items="select.userList"
@@ -36,21 +40,11 @@
 
 <script>
 import { fetchRegistedVaccine, fetchUserList, orderVaccine } from '@/api/covid';
-
+import VaccineRegistList from '@/components/VaccineRegistList.vue';
+import bus from '@/utils/bus';
 export default {
 	async mounted() {
-		const response = await fetchRegistedVaccine();
-		const { data } = await fetchUserList(); // 유저목록
-		const fetchedVaccin = response.data; // 백신목록
-		// console.log(data.data);
-		// console.log(response.data);
-		data.data.forEach(element => {
-			this.select.userList.push(element);
-		});
-
-		fetchedVaccin.forEach(element2 => {
-			this.select.vaccineList.push(element2);
-		});
+		this.fillData();
 	},
 	data: () => ({
 		// select v-model
@@ -91,9 +85,27 @@ export default {
 				await orderVaccine(orderData);
 				alert('등록완료');
 				this.initForm();
+				bus.$emit('refresh');
 			} catch (error) {
-				alert('올바른 정보를 입력하세요');
+				alert('올바른 수량을 입력하세요');
 			}
+		},
+		async fillData() {
+			const response = await fetchRegistedVaccine();
+			const { data } = await fetchUserList(); // 유저목록
+			const fetchedVaccin = response.data; // 백신목록
+			// console.log(data.data);
+
+			data.data.forEach(element => {
+				// 내 회원정보만 표시
+				if (this.$store.state.name == element.email)
+					this.select.userList.push(element);
+			});
+
+			// this.select.userList.push(this.$store.state.name);
+			fetchedVaccin.forEach(element2 => {
+				this.select.vaccineList.push(element2);
+			});
 		},
 
 		validate() {
@@ -107,7 +119,7 @@ export default {
 			(this.userId = ''), (this.itemId = ''), (this.count = 1);
 		},
 	},
-	components: {},
+	components: { VaccineRegistList },
 };
 </script>
 

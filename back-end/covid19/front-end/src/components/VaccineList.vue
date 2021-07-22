@@ -14,6 +14,9 @@
 							상태
 						</th>
 						<th class="text-left">
+							수량
+						</th>
+						<th class="text-left">
 							날짜
 						</th>
 					</tr>
@@ -22,17 +25,18 @@
 					<tr v-for="item in items" :key="item.name">
 						<td>{{ item.userName }}</td>
 						<td>{{ item.orderName }}</td>
-						<td>{{ item.orderStatus }}</td>
+						<td class="indigo--text">{{ item.orderStatus }}</td>
+						<td class="red--text">{{ item.orderCount }}</td>
 						<td>{{ `${item.orderDate.slice(0, 10)}` }}</td>
 						<v-container>
-							<v-btn
-								@click="deleteOrder(item.orderId)"
-								v-if="isAdmin"
-								color="primary"
-							>
+							<v-btn @click="deleteOrder(item.orderId)" color="primary">
 								취소
 							</v-btn>
-							<v-btn @click="cancelOrder(item.orderId)" color="primary">
+							<v-btn
+								@click="cancelOrder(item.orderId)"
+								color="primary"
+								v-if="isAdmin"
+							>
 								대기
 							</v-btn>
 							<v-btn
@@ -56,7 +60,7 @@ import {
 	deletelOrderVaccine,
 	completeOrderVaccine,
 } from '@/api/covid';
-
+import bus from '@/utils/bus';
 export default {
 	data() {
 		return {
@@ -71,8 +75,9 @@ export default {
 	},
 	async mounted() {
 		const { data } = await fetchOrders();
-		console.log(data);
 		this.items = data;
+		console.log(data);
+		console.log(this.$store.state.orderitem);
 	},
 
 	methods: {
@@ -91,6 +96,7 @@ export default {
 				// 데이터 변경사항 적용
 				const { data } = await fetchOrders();
 				this.items = data;
+				bus.$emit('set:quantity');
 			} else if (con_test == false) {
 				console.log('취소');
 			}

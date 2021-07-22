@@ -5,7 +5,7 @@
 				<AppBar @drawer="drawer = !drawer"></AppBar>
 				<Drawer v-model="drawer"></Drawer>
 			</div>
-			<v-content>
+			<v-content class="mt-10">
 				<router-view></router-view>
 			</v-content>
 		</v-container>
@@ -26,3 +26,13 @@ export default {
 	},
 };
 </script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap'); */
+* {
+	/* font-family: 'Do Hyeon', sans-serif; */
+	font-family: 'Jua', sans-serif;
+
+	/* font-family: 'Noto Sans KR', sans-serif; */
+}
+</style>

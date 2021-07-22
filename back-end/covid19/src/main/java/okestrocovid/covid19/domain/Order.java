@@ -102,4 +102,10 @@ public class Order {
             orderItem.cancel();
         }
     }
+
+    public void delete(){
+        for (OrderItem orderItem : orderItems) {
+            orderItem.delete();
+        }
+    }
 }

@@ -44,6 +44,9 @@ public class OrderItem {
     public void cancel() {
         getItem().addStock(count);
     }
+    public void delete() {
+        getItem().restoreStock(count);
+    }
 
 
 }

@@ -19,9 +19,6 @@
 				<VaccineRegistForm></VaccineRegistForm>
 			</template>
 			<template v-else>
-				<p class="text-center white--text grey darken-1">
-					사용자 등록 정보
-				</p>
 				<VaccineRegistList></VaccineRegistList>
 			</template>
 		</div>

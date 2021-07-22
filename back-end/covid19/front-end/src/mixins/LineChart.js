@@ -24,6 +24,7 @@ export default {
 			scaleSteps: 10,
 			scaleStepWidth: 50,
 			scaleStartValue: 10,
+
 			// scaleEndValue: 3000,
 		});
 	},

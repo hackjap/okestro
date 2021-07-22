@@ -20,7 +20,7 @@
 
 			<transition name="page">
 				<SimpleDataTable
-					class="mt-10"
+					class="ma-10"
 					:day="this.dayCycle"
 					:listnum="this.listNum"
 				></SimpleDataTable>
@@ -42,10 +42,10 @@
 
 <script>
 import LineChart from '@/mixins/LineChart';
-import DateFilter from '@/components/DateFilter';
-import CycleButton from '@/components/CycleButton.vue';
+import DateFilter from '@/components/common/DateFilter';
+import CycleButton from '@/components/common/CycleButton.vue';
 // import DataTable from '@/components/DataTable.vue';
-import SimpleDataTable from '@/components/SimpleDataTable.vue';
+import SimpleDataTable from '@/components/common/SimpleDataTable.vue';
 import { fetchPatient } from '../api/covid';
 import { Line } from 'vue-chartjs';
 

@@ -10,7 +10,7 @@ const router = new VueRouter({
 	routes: [
 		{
 			path: '/',
-			name: 'Home',
+			name: '코로나차트',
 			component: () => import('@/views/VueChart'),
 
 			meta: { auth: true },
@@ -90,7 +90,7 @@ router.beforeEach((to, from, next) => {
 		next('/login');
 		return;
 	} else if (to.meta.admin && !store.getters.isAdmin) {
-		alert('관리자 페이지입니다..');
+		alert('관리자 로그인 후 이용 가능합니다.');
 		next('/login');
 		return; //
 	}

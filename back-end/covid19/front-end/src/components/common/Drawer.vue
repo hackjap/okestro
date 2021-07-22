@@ -10,11 +10,11 @@
 		</template>
 		<v-list-item>
 			<v-list-item-content>
-				<v-list-item-title class="text-h6 ">
-					COVID-VUE
-				</v-list-item-title>
+				<span class="text-h4 primary--text ">
+					매<span class="white--text ">일의 코</span>로나
+				</span>
 				<v-list-item-subtitle class="mt-1">
-					장성필님 환영합니다.
+					{{ this.$store.state.name || '로그인 후 이용해주세요' }}
 				</v-list-item-subtitle>
 			</v-list-item-content>
 		</v-list-item>
@@ -74,13 +74,13 @@ export default {
 			// { title: 'Forms', icon: 'mdi-image', to: '/forms' },
 
 			{
-				title: '코로나 확진자',
+				title: '코로나 차트',
 				icon: 'mdi-chart-line',
 				to: '/',
 			},
-			{ title: '백신예방접종센터', icon: 'mdi-map', to: '/map' },
+			{ title: '코로나 맵', icon: 'mdi-map', to: '/map' },
 
-			{ title: '백신접종신청', icon: 'mdi-map', to: '/vaccine' },
+			{ title: '백신접종신청', icon: 'mdi-needle', to: '/vaccine' },
 
 			{
 				title: '관리자페이지',

@@ -44,6 +44,7 @@
 
 <script>
 import { signupUser } from '@/api/auth';
+import { saveUserToCookie } from '@/utils/index';
 export default {
 	data: () => ({
 		value: '',
@@ -80,8 +81,19 @@ export default {
 				// this.value = data.findUsers; // user 배열
 				console.log(data);
 				this.value = data.name;
-				if (this.value != '') alert(`${data.name}님 가입을 환영합니다.`);
-				else throw '올바른 정보를 입력하세요';
+				if (this.value != '') {
+					alert(`${data.name}님 가입을 환영합니다.`);
+					// 로그인 처리
+					const userEmail = userData.email;
+
+					saveUserToCookie(userEmail);
+					this.$store.commit('setName', userEmail);
+
+					const validation = this.$store.state.name != '';
+					if (validation) {
+						this.$router.push('/home');
+					}
+				} else throw '올바른 정보를 입력하세요';
 
 				this.$router.push('/home');
 			} catch (error) {

@@ -33,5 +33,11 @@ public  class Item {
         }
         this.stockQuantity = restStock;
     }
-
+    public void restoreStock(int quantity) {
+        int restStock = this.stockQuantity + quantity;
+//        if (restStock < 0) {
+//            throw new NotEnoughStockException("need more stock");
+//        }
+        this.stockQuantity = restStock;
+    }
 }

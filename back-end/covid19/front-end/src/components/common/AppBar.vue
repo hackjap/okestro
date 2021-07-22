@@ -6,9 +6,7 @@
 			<!-- 1 -->
 			<template v-if="isUserLogin">
 				<v-row justify="end" class="pa-5">
-					<v-btn class="mr-3" @click="logoutUser">
-						{{ this.$store.state.name }} 로그아웃</v-btn
-					>
+					<v-btn class="mr-3" @click="logoutUser"> 로그아웃</v-btn>
 				</v-row>
 			</template>
 			<!-- 2 -->

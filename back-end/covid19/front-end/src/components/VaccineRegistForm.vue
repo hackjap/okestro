@@ -42,7 +42,7 @@ export default {
 	data: () => ({
 		formData: {
 			vaccine: '',
-			price: ' ',
+			price: '',
 			quantity: '',
 			count: '',
 		},

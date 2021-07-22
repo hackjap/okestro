@@ -10,6 +10,7 @@ export default new Vuex.Store({
 		user: {},
 		order: {},
 		vaccine: {},
+		orderitem: [],
 	},
 	getters: {
 		isLogin(state) {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
 		},
 		clearName(state) {
 			state.name = '';
+		},
+		setOrderitem(state, orderitem) {
+			state.orderitem = orderitem;
 		},
 	},
 	actions: {

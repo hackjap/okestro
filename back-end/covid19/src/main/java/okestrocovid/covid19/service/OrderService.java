@@ -59,12 +59,14 @@ public class OrderService {
     @Transactional
     public void deleteOrder(Long orderId) {
 
+        Order order = orderRepository.findOne(orderId);
+        order.delete();
         ordersRepository.deleteById(orderId);
 
 //        // 주문 엔티티 조회
 //        Order order = orderRepository.findOne(orderId);
 //
-//        // 주문 취소
+        // 주문 취소
 //        order.cancel();
     }
 
