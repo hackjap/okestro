@@ -3,7 +3,7 @@
 		<v-text-field
 			v-model="email"
 			:rules="emailRules"
-			label="E-mail"
+			label="이메일"
 			required
 		></v-text-field>
 
@@ -12,10 +12,11 @@
 			:append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
 			:type="show1 ? 'text' : 'password'"
 			name="input-10-1"
-			label="Normal with hint text"
+			label="비밀번호"
 			hint="At least 8 characters"
 			counter
 			@click:append="show1 = !show1"
+			@keyup.enter="submitForm"
 		></v-text-field>
 		<!-- :rules="[rules.required, rules.min]" -->
 		<v-btn :disabled="!valid" color="success" class="mr-4" @click="submitForm">
@@ -33,8 +34,6 @@
 </template>
 
 <script>
-import { loginUser } from '@/api/auth';
-import { saveUserToCookie } from '@/utils/index';
 export default {
 	data: () => ({
 		user: [],
@@ -70,24 +69,7 @@ export default {
 				email: this.email,
 				password: this.password,
 			};
-			try {
-				const { data } = await loginUser(userData);
-				this.user = data.data[0]; // user 배열
-				console.log(this.user);
-
-				const userEmail = this.user.email;
-
-				saveUserToCookie(userEmail);
-				this.$store.commit('setName', userEmail);
-
-				const validation = this.user.email != '';
-				if (validation) {
-					alert(`${this.user.email}님 환영합니다!`);
-					this.$router.push('/');
-				}
-			} catch (error) {
-				alert(`아이디 비밀번호를 확인하세요`);
-			}
+			this.$store.dispatch('LOGIN', userData);
 		},
 
 		validate() {

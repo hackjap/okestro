@@ -4,31 +4,31 @@
 			v-model="name"
 			:counter="10"
 			:rules="nameRules"
-			label="Name"
+			label="이름"
 			required
 		></v-text-field>
 
 		<v-text-field
 			v-model="email"
 			:rules="emailRules"
-			label="E-mail"
+			label="이메일"
 			required
 		></v-text-field>
 
-		<v-text-field v-model="password" label="password" required></v-text-field>
+		<v-text-field v-model="password" label="비밀번호" required></v-text-field>
 
 		<v-select
 			v-model="age"
 			:items="items"
 			:rules="[v => !!v || 'Item is required']"
-			label="Item"
+			label="나이"
 			required
 		></v-select>
 
 		<v-checkbox
 			v-model="checkbox"
 			:rules="[v => !!v || 'You must agree to continue!']"
-			label="Do you agree?"
+			label="회원가입 동의"
 			required
 		></v-checkbox>
 

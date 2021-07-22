@@ -26,13 +26,7 @@ const router = new VueRouter({
 			name: '로그인',
 			component: () => import('@/views/Login.vue'),
 		},
-		{
-			path: '/chart',
-			name: '코로나 차트',
-			component: () => import('@/views/Chart'),
 
-			meta: { auth: true },
-		},
 		{
 			path: '/map',
 			name: '코로나 맵',

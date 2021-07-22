@@ -1,5 +1,5 @@
 <template>
-	<v-container class="primary mt-10" fluid>
+	<v-container class="primary">
 		<div id="map" class="map" style="width:100%;height:800px;"></div>
 
 		<v-bottom-navigation color="teal" grow background-color="grey lighten-4">
@@ -9,11 +9,11 @@
 				<v-icon>mdi-needle</v-icon>
 			</v-btn>
 
-			<v-btn>
+			<!-- <v-btn>
 				<span>Favorites</span>
 
 				<v-icon>mdi-heart</v-icon>
-			</v-btn>
+			</v-btn> -->
 
 			<v-btn @click="getLocation">
 				<span>내 위치</span>

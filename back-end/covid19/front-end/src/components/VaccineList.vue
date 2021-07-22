@@ -4,19 +4,19 @@
 			<template v-slot:default>
 				<thead>
 					<tr>
-						<th class="text-left">
+						<th class="text-left indigo--text" style="font-size:15px">
 							회원명
 						</th>
-						<th class="text-left">
+						<th class="text-left indigo--text" style="font-size:15px">
 							백신종류
 						</th>
-						<th class="text-left">
+						<th class="text-left indigo--text" style="font-size:15px">
 							상태
 						</th>
-						<th class="text-left">
+						<th class="text-left indigo--text" style="font-size:15px">
 							수량
 						</th>
-						<th class="text-left">
+						<th class="text-left indigo--text" style="font-size:15px">
 							날짜
 						</th>
 					</tr>
@@ -25,17 +25,22 @@
 					<tr v-for="item in items" :key="item.name">
 						<td>{{ item.userName }}</td>
 						<td>{{ item.orderName }}</td>
-						<td class="indigo--text">{{ item.orderStatus }}</td>
-						<td class="red--text">{{ item.orderCount }}</td>
+						<td class="teal--text">{{ item.orderStatus }}</td>
+						<td class="red--text">{{ item.orderCount + '개' }}</td>
 						<td>{{ `${item.orderDate.slice(0, 10)}` }}</td>
-						<v-container>
-							<v-btn @click="deleteOrder(item.orderId)" color="primary">
+						<v-container class="pa-1">
+							<v-btn
+								@click="deleteOrder(item.orderId)"
+								color="primary"
+								class="mt-2"
+							>
 								취소
 							</v-btn>
 							<v-btn
 								@click="cancelOrder(item.orderId)"
 								color="primary"
 								v-if="isAdmin"
+								class="mt-2"
 							>
 								대기
 							</v-btn>
@@ -43,6 +48,7 @@
 								@click="finishOrder(item.orderId)"
 								v-if="isAdmin"
 								color="primary"
+								class="mt-2"
 							>
 								완료
 							</v-btn>

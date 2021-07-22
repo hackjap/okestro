@@ -23,8 +23,10 @@
 				<tbody>
 					<tr v-for="data in datas" :key="data.name">
 						<td>{{ data.name }}</td>
-						<td class="indigo--text">{{ data.price }}</td>
-						<td class="red--text">{{ data.quantity }}</td>
+						<td class="indigo--text">
+							{{ data.price.toLocaleString() + '원' }}
+						</td>
+						<td class="red--text">{{ data.quantity + '개' }}</td>
 						<td>{{ data.country }}</td>
 					</tr>
 				</tbody>
@@ -36,9 +38,9 @@
 				백신 예방 접종 리스트
 			</p>
 			<v-card>
-				<v-card class="mt-10"></v-card>
+				<v-card class=""></v-card>
 
-				<VaccineList></VaccineList>
+				<VaccineList class="pa-1"></VaccineList>
 			</v-card>
 		</template>
 	</v-container>

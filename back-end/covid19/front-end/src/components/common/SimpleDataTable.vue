@@ -1,23 +1,23 @@
 <template>
 	<v-simple-table>
 		<template v-slot:default>
-			<thead>
-				<tr class="table-header green lighten-5">
-					<th class="text-center black--text ">
+			<thead class="pa-3">
+				<tr class="table-header green lighten-5 ">
+					<td class="ta text-center black--text" style="font-size:20px">
 						날짜
-					</th>
-					<th class="text-center black--text">
+					</td>
+					<td class="ta text-center black--text" style="font-size:20px">
 						확진환자
-					</th>
-					<th class="text-center black--text">
+					</td>
+					<td class="ta text-center black--text" style="font-size:20px ">
 						격리해제
-					</th>
-					<th class="text-center black--text">
+					</td>
+					<td class="ta text-center black--text" style="font-size:20px">
 						치료중
-					</th>
-					<th class="text-center black--text">
+					</td>
+					<td class="ta text-center black--text" style="font-size:20px">
 						사망
-					</th>
+					</td>
 				</tr>
 			</thead>
 			<tbody class="grey lighten-5">
@@ -158,3 +158,8 @@ export default {
 	},
 };
 </script>
+<style scopped>
+.ta {
+	font-size: 20pt;
+}
+</style>

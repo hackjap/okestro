@@ -87,7 +87,7 @@ export default {
 				this.initForm();
 				bus.$emit('refresh');
 			} catch (error) {
-				alert('올바른 수량을 입력하세요');
+				alert('올바른 수량 입력하세요');
 			}
 		},
 		async fillData() {

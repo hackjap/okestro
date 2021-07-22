@@ -10,8 +10,8 @@
 		</template>
 		<v-list-item>
 			<v-list-item-content>
-				<span class="text-h4 primary--text ">
-					매<span class="white--text ">일의 코</span>로나
+				<span class=" primary--text" style="font-size:35px">
+					매<span class="white--text " style="font-size:28px">일의 코</span>로나
 				</span>
 				<v-list-item-subtitle class="mt-1">
 					{{ this.$store.state.name || '로그인 후 이용해주세요' }}

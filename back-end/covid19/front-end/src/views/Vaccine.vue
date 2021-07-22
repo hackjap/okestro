@@ -1,5 +1,5 @@
 <template>
-	<v-container class="mt-10">
+	<v-container class="mt-5" style="width:100%">
 		<v-card>
 			<!-- <v-tabs fixed-tabs border-color="indigo" dark>
 			<v-tab class="display-1 primary" @click="firstTab">
@@ -11,8 +11,8 @@
 		</v-tabs> -->
 			<template>
 				<v-tabs>
-					<v-tab @click="firstTab">잔여백신예약</v-tab>
-					<v-tab @click="secondTab">백신예약조회</v-tab>
+					<v-tab @click="firstTab" style="font-size:20px;">잔여백신예약</v-tab>
+					<v-tab @click="secondTab" style="font-size:20px;">백신예약조회</v-tab>
 				</v-tabs>
 			</template>
 			<template v-if="this.flag">
@@ -27,7 +27,7 @@
 
 <script>
 import VaccineList from '../components/VaccineList.vue';
-import VaccineForm from '../components/VaccineForm.vue';
+import VaccineForm from '@/components/VaccineForm.vue';
 export default {
 	data() {
 		return {

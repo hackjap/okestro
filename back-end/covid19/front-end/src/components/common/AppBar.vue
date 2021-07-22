@@ -15,10 +15,6 @@
 					<v-btn class="mr-3" to="/login"> 로그인</v-btn>
 					<v-btn class="mr-3" to="/signup"> 회원가입</v-btn>
 				</v-row>
-
-				<!-- <router-link to="/login">로그인</router-link>
-
-				<router-link to="/signup">회원가입</router-link> -->
 			</template>
 		</v-spacer>
 	</v-app-bar>

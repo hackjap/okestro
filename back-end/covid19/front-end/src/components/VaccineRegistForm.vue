@@ -20,7 +20,7 @@
 				></v-text-field>
 				<v-text-field
 					v-model="formData.country"
-					label="원산지"
+					label="생산국"
 					required
 				></v-text-field>
 				<v-btn
