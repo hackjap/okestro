@@ -1,7 +1,6 @@
 <template>
 	<v-content class="pa-3 ">
 		<v-card class="grey lighten-4 pa-5">
-			<p class="text-center indigo--text ">잔여 백신 현황</p>
 			<VaccineRegistList class="pa-3"></VaccineRegistList>
 		</v-card>
 		<v-form ref="form" v-model="valid" lazy-validation class="mt-5">

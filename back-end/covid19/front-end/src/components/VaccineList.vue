@@ -25,14 +25,14 @@
 					<tr v-for="item in items" :key="item.name">
 						<td>{{ item.userName }}</td>
 						<td>{{ item.orderName }}</td>
-						<td class="teal--text">{{ item.orderStatus }}</td>
+						<td class="primary--text">{{ item.orderStatus }}</td>
 						<td class="red--text">{{ item.orderCount + '개' }}</td>
 						<td>{{ `${item.orderDate.slice(0, 10)}` }}</td>
 						<v-container class="pa-1">
 							<v-btn
 								@click="deleteOrder(item.orderId)"
 								color="primary"
-								class="mt-2"
+								class="mt-1"
 								v-if="isAdmin || item.userEmail == $store.state.name"
 							>
 								취소
@@ -41,7 +41,7 @@
 								@click="cancelOrder(item.orderId)"
 								color="primary"
 								v-if="isAdmin"
-								class="mt-2"
+								class="mt-1"
 							>
 								대기
 							</v-btn>
@@ -49,7 +49,7 @@
 								@click="finishOrder(item.orderId)"
 								v-if="isAdmin"
 								color="primary"
-								class="mt-2"
+								class="mt-1"
 							>
 								완료
 							</v-btn>

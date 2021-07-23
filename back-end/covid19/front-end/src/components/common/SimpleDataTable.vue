@@ -1,56 +1,64 @@
 <template>
-	<v-simple-table>
-		<template v-slot:default>
-			<thead class="pa-3">
-				<tr class="table-header green lighten-5 ">
-					<td class="ta text-center black--text" style="font-size:20px">
-						날짜
-					</td>
-					<td class="ta text-center black--text" style="font-size:20px">
-						확진환자
-					</td>
-					<td class="ta text-center black--text" style="font-size:20px ">
-						격리해제
-					</td>
-					<td class="ta text-center black--text" style="font-size:20px">
-						치료중
-					</td>
-					<td class="ta text-center black--text" style="font-size:20px">
-						사망
-					</td>
-				</tr>
-			</thead>
-			<tbody class="grey lighten-5">
-				<tr
-					v-for="(item, i) in value"
-					:key="item.name"
-					class="font-weight-medium "
-				>
-					<template v-if="i !== value.length - 1">
-						<td class="text-center">{{ item.stateDt - 1 }}</td>
-						<td class="text-center">
-							{{ item.decideCnt.toLocaleString() + '명' }}
-							<span class="red--text ">
-								{{ '▲' + patients[i] }}
-							</span>
+	<v-card>
+		<v-card-title class="text-center grey lighten-5 text-center justify-center">
+			코로나19 국내 발생 현황</v-card-title
+		>
+
+		<v-simple-table>
+			<template v-slot:default>
+				<thead class="pa-3">
+					<tr class="table-header green lighten-5 ">
+						<td class="ta text-center black--text" style="font-size:20px">
+							날짜
 						</td>
-						<td class="text-center">
-							{{ item.clearCnt.toLocaleString() + '명' }}
-							<span class="indigo--text">{{ '▲' + clear[i] }} </span>
+						<td class="ta text-center black--text" style="font-size:20px">
+							확진환자
 						</td>
-						<td class="text-center">
-							{{ item.careCnt.toLocaleString() + '명' }}
-							<span class="green--text">{{ '▲' + care[i] }} </span>
+						<td class="ta text-center black--text" style="font-size:20px ">
+							격리해제
 						</td>
-						<td class="text-center">
-							{{ item.deathCnt.toLocaleString() + '명' }}
-							<span class="grey--text">{{ '▲' + death[i] }} </span>
+						<td class="ta text-center black--text" style="font-size:20px">
+							치료중
 						</td>
-					</template>
-				</tr>
-			</tbody>
-		</template>
-	</v-simple-table>
+						<td class="ta text-center black--text" style="font-size:20px">
+							사망
+						</td>
+					</tr>
+				</thead>
+				<tbody class="">
+					<tr
+						v-for="(item, i) in value"
+						:key="item.name"
+						class="font-weight-medium "
+					>
+						<template v-if="i !== value.length - 1">
+							<td class="text-center">
+								{{ to_date_format((item.stateDt - 1).toString(), '/') }}
+							</td>
+							<td class="text-center">
+								{{ item.decideCnt.toLocaleString() + '명' }}
+								<span class="red--text ">
+									{{ '▲' + patients[i] }}
+								</span>
+							</td>
+							<td class="text-center">
+								{{ item.clearCnt.toLocaleString() + '명' }}
+								<span class="indigo--text">{{ '▲' + clear[i] }} </span>
+							</td>
+							<td class="text-center">
+								{{ item.careCnt.toLocaleString() + '명' }}
+								<span class="green--text">{{ '▲' + care[i] }} </span>
+							</td>
+							<td class="text-center">
+								{{ item.deathCnt.toLocaleString() + '명' }}
+								<span class="grey--text">{{ '▲' + death[i] }} </span>
+							</td>
+						</template>
+					</tr>
+				</tbody>
+			</template>
+		</v-simple-table>
+	</v-card>
 </template>
 <script>
 import { fetchPatient } from '@/api/covid';
@@ -90,6 +98,15 @@ export default {
 		},
 	},
 	methods: {
+		to_date_format(date_str, gubun) {
+			var yyyyMMdd = String(date_str);
+			var sYear = yyyyMMdd.substring(0, 4);
+			var sMonth = yyyyMMdd.substring(4, 6);
+			var sDate = yyyyMMdd.substring(6, 8);
+
+			return sYear + gubun + sMonth + gubun + sDate;
+		},
+
 		async fetchData(day, cycle) {
 			// 코로나 확진자 총 데이터
 			const { data } = await fetchPatient(day, cycle);

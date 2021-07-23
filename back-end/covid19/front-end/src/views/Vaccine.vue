@@ -1,14 +1,6 @@
 <template>
 	<v-container class="mt-5" style="width:100%">
 		<v-card>
-			<!-- <v-tabs fixed-tabs border-color="indigo" dark>
-			<v-tab class="display-1 primary" @click="firstTab">
-				신청하기
-			</v-tab>
-			<v-tab class="display-1 primary" @click="secondTab">
-				신청확인
-			</v-tab>
-		</v-tabs> -->
 			<template>
 				<v-tabs>
 					<v-tab @click="firstTab" style="font-size:20px;">잔여백신예약</v-tab>

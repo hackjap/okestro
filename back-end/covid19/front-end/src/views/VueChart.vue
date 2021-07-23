@@ -14,9 +14,6 @@
 		</div>
 		<div class="table-container ">
 			<hr class="primary lighten-4" />
-			<p class="text-center mt-10">
-				코로나19 국내 발생 현황
-			</p>
 
 			<transition name="page">
 				<SimpleDataTable
