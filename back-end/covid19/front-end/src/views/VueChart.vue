@@ -173,9 +173,7 @@ export default {
 	width: 400px;
 	height: 400px;
 }
-.table-container {
-	/* display: flex; */
-}
+
 .cycle-button {
 	width: 350px;
 }

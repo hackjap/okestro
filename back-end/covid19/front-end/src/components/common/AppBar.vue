@@ -1,7 +1,16 @@
 <template>
 	<v-app-bar app color="primary" dark>
 		<v-app-bar-nav-icon @click="$emit('drawer')"></v-app-bar-nav-icon>
-		<v-toolbar-title>{{ $route.name }}</v-toolbar-title>
+		<v-toolbar-title>
+			<div justify="center">
+				<v-img
+					src="../../../dist/img/logo_white.png"
+					max-height="60"
+					max-width="160"
+				>
+				</v-img>
+			</div>
+		</v-toolbar-title>
 		<v-spacer>
 			<!-- 1 -->
 			<template v-if="isUserLogin">

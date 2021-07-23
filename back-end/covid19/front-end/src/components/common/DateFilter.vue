@@ -3,7 +3,7 @@
 		<v-card-text>
 			<v-row align="center" justify="center">
 				<v-col cols="12">
-					<p class="text-center">
+					<p class="text-center" style="font-size:20px">
 						코로나바이러스-19
 					</p>
 				</v-col>

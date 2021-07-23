@@ -33,6 +33,7 @@
 								@click="deleteOrder(item.orderId)"
 								color="primary"
 								class="mt-2"
+								v-if="isAdmin || item.userEmail == $store.state.name"
 							>
 								취소
 							</v-btn>
@@ -78,12 +79,16 @@ export default {
 		isAdmin() {
 			return this.$store.state.name == 'admin@naver.com';
 		},
+		isUser(email) {
+			return this.$store.state.name == email;
+		},
 	},
 	async mounted() {
 		const { data } = await fetchOrders();
 		this.items = data;
-		console.log(data);
-		console.log(this.$store.state.orderitem);
+		// console.log(data);
+		// console.log(this.$store.state.orderitem);
+		console.log(this.items);
 	},
 
 	methods: {
@@ -93,6 +98,7 @@ export default {
 			// 데이터 변경사항 적용
 			const { data } = await fetchOrders();
 			this.items = data;
+			console.log(data);
 		},
 		// 예약 삭제
 		async deleteOrder(orderId) {

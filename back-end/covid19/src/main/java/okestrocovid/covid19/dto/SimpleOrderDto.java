@@ -13,6 +13,7 @@ public class SimpleOrderDto {
     private Long orderId;
     private String userName;
     private String orderName;
+    private String userEmail;
     private LocalDateTime orderDate;
     private CureStatus orderStatus;
     private int orderCount;
@@ -21,6 +22,7 @@ public class SimpleOrderDto {
     public SimpleOrderDto(Order order){
         orderId = order.getId();
         userName = order.getUser().getName();
+        userEmail = order.getUser().getEmail();
         orderName = order.getOrderItems().get(0).getItem().getName();
         orderDate = order.getOrderDate();
         orderStatus = order.getStatus();

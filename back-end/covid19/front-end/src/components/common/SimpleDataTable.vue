@@ -27,22 +27,22 @@
 					class="font-weight-medium "
 				>
 					<template v-if="i !== value.length - 1">
-						<td class="">{{ item.stateDt - 1 }}</td>
-						<td class="">
+						<td class="text-center">{{ item.stateDt - 1 }}</td>
+						<td class="text-center">
 							{{ item.decideCnt.toLocaleString() + '명' }}
 							<span class="red--text ">
 								{{ '▲' + patients[i] }}
 							</span>
 						</td>
-						<td>
+						<td class="text-center">
 							{{ item.clearCnt.toLocaleString() + '명' }}
 							<span class="indigo--text">{{ '▲' + clear[i] }} </span>
 						</td>
-						<td>
+						<td class="text-center">
 							{{ item.careCnt.toLocaleString() + '명' }}
 							<span class="green--text">{{ '▲' + care[i] }} </span>
 						</td>
-						<td>
+						<td class="text-center">
 							{{ item.deathCnt.toLocaleString() + '명' }}
 							<span class="grey--text">{{ '▲' + death[i] }} </span>
 						</td>

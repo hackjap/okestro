@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { fetchPatient } from '../api/covid';
+import { fetchPatient } from '../../api/covid';
 
 export default {
 	async created() {
