@@ -13,6 +13,9 @@ export default new Vuetify({
 		themes: {
 			light: {
 				primary: '#4CAF50',
+				// #0070bd 파랑
+				// #4CAF50녹색
+
 				secondary: colors.blue,
 			},
 		},

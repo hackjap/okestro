@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 // import Chart from '@/views/Chart';
-import store from '@/store/index';
+// import store from '@/store/index';
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -78,17 +78,17 @@ const router = new VueRouter({
 });
 
 // 네비게이션 가드
-router.beforeEach((to, from, next) => {
-	if (to.meta.auth && !store.getters.isLogin) {
-		alert('로그인인 후 이용해주세요.');
-		next('/login');
-		return;
-	} else if (to.meta.admin && !store.getters.isAdmin) {
-		alert('관리자 로그인 후 이용 가능합니다.');
-		next('/login');
-		return; //
-	}
-	next();
-});
+// router.beforeEach((to, from, next) => {
+// 	if (to.meta.auth && !store.getters.isLogin) {
+// 		alert('로그인인 후 이용해주세요.');
+// 		next('/login');
+// 		return;
+// 	} else if (to.meta.admin && !store.getters.isAdmin) {
+// 		alert('관리자 로그인 후 이용 가능합니다.');
+// 		next('/login');
+// 		return; //
+// 	}
+// 	next();
+// });
 
 export default router;

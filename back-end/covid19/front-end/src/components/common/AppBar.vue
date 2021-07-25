@@ -3,12 +3,14 @@
 		<v-app-bar-nav-icon @click="$emit('drawer')"></v-app-bar-nav-icon>
 		<v-toolbar-title>
 			<div justify="center">
-				<v-img
-					src="../../../dist/img/logo_white.png"
-					max-height="60"
-					max-width="160"
-				>
-				</v-img>
+				<span>
+					<v-img
+						src="../../../dist/img/logo_white.png"
+						max-height="60"
+						max-width="160"
+					>
+					</v-img>
+				</span>
 			</div>
 		</v-toolbar-title>
 		<v-spacer>
