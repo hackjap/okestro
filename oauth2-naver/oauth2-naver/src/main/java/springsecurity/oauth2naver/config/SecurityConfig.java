@@ -23,12 +23,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/user/**").authenticated()
+                .antMatchers("/user/**").authenticated() // 인증만되면 들어갈 수 있는 주소!
                 .antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll()  // 위 3개 조건을 제외한 모든 주소는 허용
                 .and()
                 .formLogin()
-                .loginPage("/loginForm");  // 해당 조건시 , 로그인 페이지로 리다이렉션
+                .loginPage("/loginForm")  // 해당 조건시 , 로그인 페이지로 리다이렉션
+                .loginProcessingUrl("/login") // /login 주소가 호출이 되면 시큐리티가 낚아채서 로그인을 진행해줌. ( controller의 로그인을 생략해줌 )
+                .defaultSuccessUrl("/"); // 로그인 시 / + "특정 페이지 " 를 지원해줌
+
+
     }
+
 }
