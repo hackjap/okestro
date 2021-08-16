@@ -1,4 +1,4 @@
-package sso.login.naver.config;
+package springsecurity.oauth2naver.config;
 
 
 import org.springframework.boot.web.servlet.view.MustacheViewResolver;
