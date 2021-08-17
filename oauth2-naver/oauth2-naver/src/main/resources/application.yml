@@ -31,6 +31,13 @@ spring:
               - email
               - profile
 
+          facebook:
+            client-id: 1025971171545704
+            client-secret: f8b998411685a181b0f67fc72054ed21
+            scope:
+              - email
+              - public_profile
+
 
 
 # 로그로 출력
