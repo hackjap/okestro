@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 import springsecurity.oauth2naver.config.auth.PrincipalDetails;
 import springsecurity.oauth2naver.config.oauth.provider.FacebookUserInfo;
 import springsecurity.oauth2naver.config.oauth.provider.GoogleUserInfo;
+import springsecurity.oauth2naver.config.oauth.provider.NaverUserInfo;
 import springsecurity.oauth2naver.config.oauth.provider.OAuth2UserInfo;
 import springsecurity.oauth2naver.model.User;
 import springsecurity.oauth2naver.repository.UserRepository;
+
+import java.util.Map;
 
 @Service
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
@@ -43,9 +46,14 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         } else if (userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
             System.out.println("페이스북 로그인 요청");
             oAuth2UserInfo = new FacebookUserInfo(oAuth2User.getAttributes());
+        }
+        else if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
+            System.out.println("네이버 로그인 요청");
+            oAuth2UserInfo = new NaverUserInfo((Map)oAuth2User.getAttributes().get("response"));
 
-        }else{
-            System.out.println("구글과 페이스북 로그인만 지원합니다.");
+        }
+        else{
+            System.out.println("구글과 페이스북과 네이버 로그인만 지원합니다.");
         }
 
 
@@ -59,7 +67,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         User userEntity = userRepository.findByUsername(username);
 
         if (userEntity == null) { // 회원이 존재하지 않을 경우
-            System.out.println("구글 로그인이 최초입니다.");
+            System.out.println("OAuth 로그인이 최초입니다.");
             userEntity = User.builder()
                     .username(username)
                     .password(password)
