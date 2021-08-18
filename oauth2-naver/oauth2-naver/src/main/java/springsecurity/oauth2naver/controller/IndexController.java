@@ -7,14 +7,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import springsecurity.oauth2naver.config.auth.PrincipalDetails;
+import springsecurity.oauth2naver.config.oauth.PrincipalOauth2UserService;
+import springsecurity.oauth2naver.config.oauth.provider.NaverUserInfo;
+import springsecurity.oauth2naver.config.oauth.provider.OAuth2UserInfo;
 import springsecurity.oauth2naver.model.User;
 import springsecurity.oauth2naver.repository.UserRepository;
+
+import java.util.Map;
 
 @Controller
 public class IndexController {
@@ -25,9 +30,13 @@ public class IndexController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    PrincipalOauth2UserService principalOauth2UserService;
+
     // 스프링 시큐리티
     // 세션( 시큐리티 세션( Authentication객체( UserDeails,OAuth2User ) ) )
 
+    @CrossOrigin("*")
     @GetMapping("/test/login")
     public @ResponseBody
     String loginTest(Authentication authentication,
@@ -39,6 +48,7 @@ public class IndexController {
         System.out.println("userDetails = " + userDetails.getUsername());
         return "세션 정보 확인하기";
     }
+
 
     @GetMapping("/test/oauth/login")
     public @ResponseBody
@@ -54,12 +64,41 @@ public class IndexController {
 
     // localhost:8080/
     // locathost:8080
+
+    @CrossOrigin("*")
     @GetMapping({"", "/"})
-    public String index() {
+    @ResponseBody
+    public String index(Authentication authentication,
+                        @AuthenticationPrincipal OAuth2User oauth
+                       ) {
         // 머스테치 기본폴더 src/main/resource/
         // 뷰리졸버 설정 : template(prefix).mustache (suffix) 생략가능
-        return "index";
+        System.out.println("---------------------------");
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+//        System.out.println("authentication = " + oAuth2User.getAttributes());
+//        System.out.println("oauth2User= " + oauth.getAttributes());
+
+        OAuth2UserInfo oAuth2UserInfo = new NaverUserInfo((Map)oAuth2User.getAttributes().get("response"));
+        System.out.println("oAuth2UserInfo = " + oAuth2UserInfo.getEmail());
+
+//        OAuth2User findOAuth2User = principalOauth2UserService.loadUser(userRequest);
+//        return "redirect:http://localhost:8081/main";
+        return oAuth2UserInfo.getEmail() + " " + oAuth2UserInfo.getName();
+
+
+
     }
+
+    @GetMapping("/home")
+    @ResponseBody
+    public String home() {
+        // 머스테치 기본폴더    src/main/resource/
+        // 뷰리졸버 설정 : template(prefix).mustache (suffix) 생략가능
+//        return "index"
+//        return "redirect:";
+        return "homehomehome!";
+    }
+
 
     // OAuth 로그인을 해도 PrincipalDetails
     // 일반 로그인을 해도 PrincipalDetails
@@ -86,6 +125,7 @@ public class IndexController {
     public String loginForm() {
         return "loginForm";
     }
+
 
     @GetMapping("/joinForm")
     public String joinForm() {
@@ -116,5 +156,7 @@ public class IndexController {
     String data() {
         return "데이터 정보";
     }
+
+
 
 }
