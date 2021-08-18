@@ -20,4 +20,6 @@ public class CorsConfig {
         source.registerCorsConfiguration("/api/**", config);
         return new org.springframework.web.filter.CorsFilter(source);
     }
+
+
 }
