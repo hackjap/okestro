@@ -66,27 +66,9 @@ public class IndexController {
     // locathost:8080
 
     @CrossOrigin("*")
-    @GetMapping({"", "/"})
-    @ResponseBody
-    public String index(Authentication authentication,
-                        @AuthenticationPrincipal OAuth2User oauth
-                       ) {
-        // 머스테치 기본폴더 src/main/resource/
-        // 뷰리졸버 설정 : template(prefix).mustache (suffix) 생략가능
-        System.out.println("---------------------------");
-        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-//        System.out.println("authentication = " + oAuth2User.getAttributes());
-//        System.out.println("oauth2User= " + oauth.getAttributes());
-
-        OAuth2UserInfo oAuth2UserInfo = new NaverUserInfo((Map)oAuth2User.getAttributes().get("response"));
-        System.out.println("oAuth2UserInfo = " + oAuth2UserInfo.getEmail());
-
-//        OAuth2User findOAuth2User = principalOauth2UserService.loadUser(userRequest);
-//        return "redirect:http://localhost:8081/main";
-        return oAuth2UserInfo.getEmail() + " " + oAuth2UserInfo.getName();
-
-
-
+    @GetMapping("")
+    public String index() {
+          return "index";
     }
 
     @GetMapping("/home")
@@ -109,16 +91,22 @@ public class IndexController {
         return "user";
     }
 
+
     @GetMapping("/admin")
     public @ResponseBody
-    String admin() {
-        return "admin";
+    String admin()  {
+            return "admin";
     }
 
     @GetMapping("/manager")
     public @ResponseBody
     String manager() {
         return "manager";
+    }
+
+    @GetMapping("/services")
+    public String services() {
+        return "services";
     }
 
     @GetMapping("/loginForm")
