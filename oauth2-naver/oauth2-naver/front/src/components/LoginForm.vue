@@ -7,7 +7,10 @@
       <input type="password" name="password" placeholder="Password"/> <br/>
       <button>로그인</button>
     </form>
-       <a href="http://localhost:8080/oauth2/authorization/naver"> 네이버 로그인 </a> <br/>
+<!--       <a href="http://localhost:8080/oauth2/authorization/naver"> 네이버 로그인 </a> <br/>-->
+    <a href="https://nid.naver.com/oauth2.0/authorize?client_id=EoQSd796FEMLdqpCDjjh&redirect_uri=http://localhost//8888/&response_type=code"> 네이버 로그인 </a> <br/>
+
+
        <a href="/joinForm">회원가입을 아직 하지 않으셨나요?</a>
   </div>
 </template>
@@ -23,11 +26,13 @@ export default {
       // redirectURI: 'http://localhost:8080/',
 
       //  FIXME state 값 random string 으로 변경
-      state: 123,
+      // state: 123,
       // naverLoginURL: 'https://nid.naver.com/oauth2.0/authorize?response_type=code'
-         naverLoginURL: 'http://localhost:8080/oauth2/authorization/naver'
+      //    naverLoginURL: 'http://localhost:8080/oauth2/authorization/naver'
     }
 
+   // https://nid.naver.com/oauth2.0/authorize?client_id=EoQSd796FEMLdqpCDjjh&redirect_uri=http://localhost//8888/&response_type=code
+    // https://kauth.kakao.com/oauth/authorize?client_id=96d3de8c081804fb73b900f5a9510aa6&redirect_uri=http://localhost:8080/login&response_type=code
   },
   created()
   {
