@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import MainPage from "@/components/MainPage";
-import LoginForm from "@/components/LoginForm";
-Vue.use(VueRouter);
+import LoginForm from "@/components/demoLoginForm";
+import NaverLogin from "@/components/NaverLogin";
+import NaverCallback from "@/components/NaverCallback";
+Vue.use(VueRouter);NaverLogin
 
 // export default new VueRouter
 const router = new VueRouter({
@@ -10,7 +12,7 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            redirect: '/login',
+
         },
         {
             path: '/main',
@@ -19,6 +21,14 @@ const router = new VueRouter({
         {
             path: '/login',
             component: LoginForm,
+        },
+        {
+          path: '/naverlogin',
+          component: NaverLogin,
+        },
+        {
+            path: '/navercallback',
+            component: NaverCallback,
         }
 
         // {
