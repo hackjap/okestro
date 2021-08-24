@@ -20,7 +20,7 @@ public class ApiController {
 
     // 로그인
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin("*")
     @PostMapping("/naver/profile")
     public String NaverLoginProfile(@RequestBody String oldToken) {
 

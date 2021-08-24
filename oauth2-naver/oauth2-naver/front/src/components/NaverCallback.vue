@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p>naver login access pages</p>
-    <p>{{this.accessToken}}</p>
+    <p>네이버 로그인 성공</p>
+<!--    <p>{{this.accessToken}}</p>-->
                                                                                                                                                                                                                                   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
   },
   async mounted() {
 
-    this.naver_id_login =  await new window.naver_id_login("EoQSd796FEMLdqpCDjjh", "http://localhost:8888/navercallback");
+    this.naver_id_login =  await new window.naver_id_login("EoQSd796FEMLdqpCDjjh", "http://localhost:3012/gate/app/main");
 
     this.accessToken = this.naver_id_login.getAccessToken();
     // alert(this.accessToken);
