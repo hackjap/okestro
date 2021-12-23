@@ -14,7 +14,7 @@
 	<name>oauth2-naver</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -71,9 +71,11 @@
 
 	<build>
 		<plugins>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.5.3</version>
 				<configuration>
 					<excludes>
 						<exclude>
@@ -82,6 +84,16 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<!-- maven-surefire-plugin 추가 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<!-- 사용하고자 하는 JDK의 java 경로 -->
+<!--				<configuration>-->
+<!--					<jvm>C:\\Program Files\\AdoptOpenJDK\\jdk-11.0.3.7-hotspot\\bin\\java</jvm>-->
+<!--				</configuration>-->
 			</plugin>
 		</plugins>
 	</build>
